@@ -173,7 +173,49 @@ namespace ProcessamentoDeImagens
 
         }
 
+        private void btSubtrairImagens_Click(object sender, EventArgs e)
+        {
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue as duas imagens para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter as mesmas dimensões para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = new Bitmap(img1.Width, img1.Height);
+
+            for (int i = 0; i < img1.Width; i++)
+            {
+                for (int j = 0; j < img1.Height; j++)
+                {
+                    Color pixelImg1 = img1.GetPixel(i, j);
+                    Color pixelImg2 = img2.GetPixel(i, j);
+
+                    int r = pixelImg1.R - pixelImg2.R;
+                    int g = pixelImg1.G - pixelImg2.G;
+                    int b = pixelImg1.B - pixelImg2.B;
+
+                    if (r > 255) r = 255;
+                    if (g > 255) g = 255;
+                    if (b > 255) b = 255;
+
+                    if (r < 0) r = 0;
+                    if (g < 0) g = 0;
+                    if (b < 0) b = 0;
+
+                    Color pixelFinal = Color.FromArgb(r, g, b);
+                    imgFinal.SetPixel(i, j, pixelFinal);
+                }
+            }
+
+            pictureBox3.Image = imgFinal;
+
+        }
 
 
 
@@ -215,5 +257,7 @@ namespace ProcessamentoDeImagens
                 imgFinal.Save(saveFileDialog1.FileName, format);
             }
         }
+
+
     }
 }

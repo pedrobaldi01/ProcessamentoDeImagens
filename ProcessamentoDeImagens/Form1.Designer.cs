@@ -38,6 +38,7 @@
             this.btCarregarImagem2 = new System.Windows.Forms.Button();
             this.btMostrarImagem = new System.Windows.Forms.Button();
             this.btSomarImagens = new System.Windows.Forms.Button();
+            this.btSubtrairImagens = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -124,11 +125,22 @@
             this.btSomarImagens.UseVisualStyleBackColor = true;
             this.btSomarImagens.Click += new System.EventHandler(this.btSomarImagens_Click);
             // 
+            // btSubtrairImagens
+            // 
+            this.btSubtrairImagens.Location = new System.Drawing.Point(344, 686);
+            this.btSubtrairImagens.Name = "btSubtrairImagens";
+            this.btSubtrairImagens.Size = new System.Drawing.Size(219, 55);
+            this.btSubtrairImagens.TabIndex = 7;
+            this.btSubtrairImagens.Text = "Subtrair imagens";
+            this.btSubtrairImagens.UseVisualStyleBackColor = true;
+            this.btSubtrairImagens.Click += new System.EventHandler(this.btSubtrairImagens_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 930);
+            this.Controls.Add(this.btSubtrairImagens);
             this.Controls.Add(this.btSomarImagens);
             this.Controls.Add(this.btMostrarImagem);
             this.Controls.Add(this.btCarregarImagem2);
@@ -158,6 +170,7 @@
         private System.Windows.Forms.Button btCarregarImagem2;
         private System.Windows.Forms.Button btMostrarImagem;
         private System.Windows.Forms.Button btSomarImagens;
+        private System.Windows.Forms.Button btSubtrairImagens;
     }
 }
 
