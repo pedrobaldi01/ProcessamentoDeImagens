@@ -37,6 +37,7 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.btCarregarImagem2 = new System.Windows.Forms.Button();
             this.btMostrarImagem = new System.Windows.Forms.Button();
+            this.btSomarImagens = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -108,19 +109,27 @@
             // 
             // btMostrarImagem
             // 
-            this.btMostrarImagem.Location = new System.Drawing.Point(863, 215);
+            this.btMostrarImagem.Location = new System.Drawing.Point(0, 0);
             this.btMostrarImagem.Name = "btMostrarImagem";
-            this.btMostrarImagem.Size = new System.Drawing.Size(300, 55);
-            this.btMostrarImagem.TabIndex = 6;
-            this.btMostrarImagem.Text = "Mostrar imagem";
-            this.btMostrarImagem.UseVisualStyleBackColor = true;
-            this.btMostrarImagem.Click += new System.EventHandler(this.btMostrarImagem_Click);
+            this.btMostrarImagem.Size = new System.Drawing.Size(75, 23);
+            this.btMostrarImagem.TabIndex = 0;
+            // 
+            // btSomarImagens
+            // 
+            this.btSomarImagens.Location = new System.Drawing.Point(344, 589);
+            this.btSomarImagens.Name = "btSomarImagens";
+            this.btSomarImagens.Size = new System.Drawing.Size(219, 55);
+            this.btSomarImagens.TabIndex = 6;
+            this.btSomarImagens.Text = "Somar imagens";
+            this.btSomarImagens.UseVisualStyleBackColor = true;
+            this.btSomarImagens.Click += new System.EventHandler(this.btSomarImagens_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 930);
+            this.Controls.Add(this.btSomarImagens);
             this.Controls.Add(this.btMostrarImagem);
             this.Controls.Add(this.btCarregarImagem2);
             this.Controls.Add(this.btSalvarImagem);
@@ -148,6 +157,7 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.Button btCarregarImagem2;
         private System.Windows.Forms.Button btMostrarImagem;
+        private System.Windows.Forms.Button btSomarImagens;
     }
 }
 

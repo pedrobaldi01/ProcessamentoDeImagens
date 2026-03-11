@@ -15,13 +15,28 @@ namespace ProcessamentoDeImagens
     {
 
         Bitmap img1;
+        Bitmap img2;
         Bitmap imgFinal;
         byte[,] vImg1Gray;
+        byte[,] vImg2Gray;
+        byte[,] vImgFinal;
+
 
         byte[,] vImg1R;
         byte[,] vImg1G;
         byte[,] vImg1B;
         byte[,] vImg1A;
+
+        byte[,] vImg2R;
+        byte[,] vImg2G;
+        byte[,] vImg2B;
+        byte[,] vImg2A;
+
+        byte[,] vimgFinalR;
+        byte[,] vimgFinalG;
+        byte[,] vimgFinalB;
+        byte[,] vimgFinalA;
+        
 
 
         public Form1()
@@ -68,10 +83,6 @@ namespace ProcessamentoDeImagens
                     vImg1G = new byte[img1.Width, img1.Height];
                     vImg1B = new byte[img1.Width, img1.Height];
                     vImg1A = new byte[img1.Width, img1.Height];
-
-                    
-
-                    pictureBox3.Image = imgFinal;
                 }
 
             }
@@ -96,8 +107,8 @@ namespace ProcessamentoDeImagens
                 bool bLoadImgOK = false;
                 try
                 {
-                    img1 = new Bitmap(filePath);
-                    imgFinal = new Bitmap(img1.Width, img1.Height);
+                    img2 = new Bitmap(filePath);
+                    imgFinal = new Bitmap(img2.Width, img2.Height);
                     bLoadImgOK = true;
                 }
                 catch (Exception ex)
@@ -110,50 +121,61 @@ namespace ProcessamentoDeImagens
                 if (bLoadImgOK == true)
                 {
                     // Adiciona imagem na PictureBox
-                    pictureBox2.Image = img1;
-                    vImg1Gray = new byte[img1.Width, img1.Height];
-                    vImg1R = new byte[img1.Width, img1.Height];
-                    vImg1G = new byte[img1.Width, img1.Height];
-                    vImg1B = new byte[img1.Width, img1.Height];
-                    vImg1A = new byte[img1.Width, img1.Height];
+                    pictureBox2.Image = img2;
+                    vImg2Gray = new byte[img2.Width, img2.Height];
+                    vImg2R = new byte[img2.Width, img2.Height];
+                    vImg2G = new byte[img2.Width, img2.Height];
+                    vImg2B = new byte[img2.Width, img2.Height];
+                    vImg2A = new byte[img2.Width, img2.Height];
 
                 }
 
             }
         }
 
-        private void btMostrarImagem_Click(object sender, EventArgs e)
+        private void btSomarImagens_Click(object sender, EventArgs e)
         {
-            // Percorre todos os pixels da imagem...
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue as duas imagens para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter as mesmas dimensões para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = new Bitmap(img1.Width, img1.Height);
+
             for (int i = 0; i < img1.Width; i++)
             {
                 for (int j = 0; j < img1.Height; j++)
                 {
-                    Color pixel = img1.GetPixel(i, j);
+                    Color pixelImg1 = img1.GetPixel(i, j);
+                    Color pixelImg2 = img2.GetPixel(i, j);
 
-                    // Para imagens RGB, extrair o valor do pixel com...
-                    byte R = pixel.R;
-                    byte G = pixel.G;
-                    byte B = pixel.B;
-                    byte A = pixel.A;
+                    int r = pixelImg1.R + pixelImg2.R;
+                    int g = pixelImg1.G + pixelImg2.G;
+                    int b = pixelImg1.B + pixelImg2.B;
 
-                    vImg1R[i, j] = R;
-                    vImg1G[i, j] = G;
-                    vImg1B[i, j] = B;
-                    vImg1A[i, j] = A;
+                    if (r > 255) r = 255;
+                    if (g > 255) g = 255;
+                    if (b > 255) b = 255;
 
-                    Color cor = Color.FromArgb(
-                        255,
-                        vImg1R[i, j],
-                        vImg1G[i, j],
-                        vImg1B[i, j]);
-
-                    imgFinal.SetPixel(i, j, cor);
+                    Color pixelFinal = Color.FromArgb(r, g, b);
+                    imgFinal.SetPixel(i, j, pixelFinal);
                 }
             }
+
             pictureBox3.Image = imgFinal;
 
         }
+
+
+
+
 
         private void btSalvarImagem_Click(object sender, EventArgs e)
         {
