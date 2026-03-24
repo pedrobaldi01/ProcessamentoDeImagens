@@ -39,9 +39,13 @@
             this.btMostrarImagem = new System.Windows.Forms.Button();
             this.btSomarImagens = new System.Windows.Forms.Button();
             this.btSubtrairImagens = new System.Windows.Forms.Button();
+            this.numUpDown_SomaImgs = new System.Windows.Forms.NumericUpDown();
+            this.numUpDown_SubtImgs = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SomaImgs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SubtImgs)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -117,7 +121,7 @@
             // 
             // btSomarImagens
             // 
-            this.btSomarImagens.Location = new System.Drawing.Point(344, 589);
+            this.btSomarImagens.Location = new System.Drawing.Point(99, 588);
             this.btSomarImagens.Name = "btSomarImagens";
             this.btSomarImagens.Size = new System.Drawing.Size(219, 55);
             this.btSomarImagens.TabIndex = 6;
@@ -127,7 +131,7 @@
             // 
             // btSubtrairImagens
             // 
-            this.btSubtrairImagens.Location = new System.Drawing.Point(344, 686);
+            this.btSubtrairImagens.Location = new System.Drawing.Point(99, 685);
             this.btSubtrairImagens.Name = "btSubtrairImagens";
             this.btSubtrairImagens.Size = new System.Drawing.Size(219, 55);
             this.btSubtrairImagens.TabIndex = 7;
@@ -135,11 +139,37 @@
             this.btSubtrairImagens.UseVisualStyleBackColor = true;
             this.btSubtrairImagens.Click += new System.EventHandler(this.btSubtrairImagens_Click);
             // 
+            // numUpDown_SomaImgs
+            // 
+            this.numUpDown_SomaImgs.Location = new System.Drawing.Point(334, 601);
+            this.numUpDown_SomaImgs.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numUpDown_SomaImgs.Name = "numUpDown_SomaImgs";
+            this.numUpDown_SomaImgs.Size = new System.Drawing.Size(94, 31);
+            this.numUpDown_SomaImgs.TabIndex = 8;
+            // 
+            // numUpDown_SubtImgs
+            // 
+            this.numUpDown_SubtImgs.Location = new System.Drawing.Point(334, 698);
+            this.numUpDown_SubtImgs.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numUpDown_SubtImgs.Name = "numUpDown_SubtImgs";
+            this.numUpDown_SubtImgs.Size = new System.Drawing.Size(94, 31);
+            this.numUpDown_SubtImgs.TabIndex = 9;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 930);
+            this.Controls.Add(this.numUpDown_SubtImgs);
+            this.Controls.Add(this.numUpDown_SomaImgs);
             this.Controls.Add(this.btSubtrairImagens);
             this.Controls.Add(this.btSomarImagens);
             this.Controls.Add(this.btMostrarImagem);
@@ -154,6 +184,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SomaImgs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SubtImgs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -171,6 +203,8 @@
         private System.Windows.Forms.Button btMostrarImagem;
         private System.Windows.Forms.Button btSomarImagens;
         private System.Windows.Forms.Button btSubtrairImagens;
+        private System.Windows.Forms.NumericUpDown numUpDown_SomaImgs;
+        private System.Windows.Forms.NumericUpDown numUpDown_SubtImgs;
     }
 }
 

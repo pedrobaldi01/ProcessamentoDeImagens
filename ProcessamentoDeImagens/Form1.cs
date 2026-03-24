@@ -135,89 +135,238 @@ namespace ProcessamentoDeImagens
 
         private void btSomarImagens_Click(object sender, EventArgs e)
         {
-            if (img1 == null || img2 == null)
+            int valor = (int)numUpDown_SomaImgs.Value;
+
+            if (img1 == null && img2 == null)
             {
-                MessageBox.Show("Carregue as duas imagens para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Carregue uma imagem primeiro para realizar a soma.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
-            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            if (valor > 0 && img1 != null && img2 != null)
             {
-                MessageBox.Show("As imagens devem ter as mesmas dimensões para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Não é possível realizar ao mesmo tempo a soma entre duas imagens e a soma de um valor constante nos pixels.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
-            imgFinal = new Bitmap(img1.Width, img1.Height);
-
-            for (int i = 0; i < img1.Width; i++)
+            if (valor > 0)
             {
-                for (int j = 0; j < img1.Height; j++)
+                if (img1 == null)
                 {
-                    Color pixelImg1 = img1.GetPixel(i, j);
-                    Color pixelImg2 = img2.GetPixel(i, j);
+                    MessageBox.Show("Carregue a Imagem 1 para realizar a soma.",
+                                    "Atenção",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    return;
+                }
 
-                    int r = pixelImg1.R + pixelImg2.R;
-                    int g = pixelImg1.G + pixelImg2.G;
-                    int b = pixelImg1.B + pixelImg2.B;
+                imgFinal = AumentarBrilho(img1, valor);
+                pictureBox3.Image = imgFinal;
+                return;
+            }
+
+            if (valor == 0)
+            {
+                if (img1 == null || img2 == null)
+                {
+                    MessageBox.Show("Valor zerado, aumente o valor ou carregue duas imagens para realizar a soma.",
+                                    "Atenção",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (img1.Width != img2.Width || img1.Height != img2.Height)
+                {
+                    MessageBox.Show("As imagens devem ter as mesmas dimensões.",
+                                    "Atenção",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    return;
+                }
+
+                imgFinal = SomarDuasImagens(img1, img2);
+                pictureBox3.Image = imgFinal;
+                return;
+            }
+
+            MessageBox.Show("Operação inválida.",
+                            "Erro",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+        }
+
+        private Bitmap AumentarBrilho(Bitmap imagem, int valor)
+        {
+            Bitmap resultado = new Bitmap(imagem.Width, imagem.Height);
+
+            for (int x = 0; x < imagem.Width; x++)
+            {
+                for (int y = 0; y < imagem.Height; y++)
+                {
+                    Color pixel = imagem.GetPixel(x, y);
+
+                    int r = pixel.R + valor;
+                    int g = pixel.G + valor;
+                    int b = pixel.B + valor;
 
                     if (r > 255) r = 255;
                     if (g > 255) g = 255;
                     if (b > 255) b = 255;
 
-                    Color pixelFinal = Color.FromArgb(r, g, b);
-                    imgFinal.SetPixel(i, j, pixelFinal);
+                    Color novoPixel = Color.FromArgb(pixel.A, r, g, b);
+                    resultado.SetPixel(x, y, novoPixel);
                 }
             }
 
-            pictureBox3.Image = imgFinal;
+            return resultado;
+        }
 
+        private Bitmap SomarDuasImagens(Bitmap imagem1, Bitmap imagem2)
+        {
+            Bitmap resultado = new Bitmap(imagem1.Width, imagem1.Height);
+
+            for (int x = 0; x < imagem1.Width; x++)
+            {
+                for (int y = 0; y < imagem1.Height; y++)
+                {
+                    Color pixel1 = imagem1.GetPixel(x, y);
+                    Color pixel2 = imagem2.GetPixel(x, y);
+
+                    int r = pixel1.R + pixel2.R;
+                    int g = pixel1.G + pixel2.G;
+                    int b = pixel1.B + pixel2.B;
+
+                    if (r > 255) r = 255;
+                    if (g > 255) g = 255;
+                    if (b > 255) b = 255;
+
+                    Color novoPixel = Color.FromArgb(r, g, b);
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
         }
 
         private void btSubtrairImagens_Click(object sender, EventArgs e)
         {
-            if (img1 == null || img2 == null)
+            int valor = (int)numUpDown_SubtImgs.Value;
+
+            if (img1 == null && img2 == null)
             {
-                MessageBox.Show("Carregue as duas imagens para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Carregue uma imagem primeiro para realizar a subtração.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
-            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            if (valor > 0 && img1 != null && img2 != null)
             {
-                MessageBox.Show("As imagens devem ter as mesmas dimensões para realizar a soma!", "Atenção", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Não é possível realizar ao mesmo tempo a operação entre duas imagens e a subtração de um valor constante nos pixels.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
                 return;
             }
 
-            imgFinal = new Bitmap(img1.Width, img1.Height);
-
-            for (int i = 0; i < img1.Width; i++)
+            if (valor <= 0)
             {
-                for (int j = 0; j < img1.Height; j++)
+                if (img1 == null || img2 == null)
                 {
-                    Color pixelImg1 = img1.GetPixel(i, j);
-                    Color pixelImg2 = img2.GetPixel(i, j);
+                    MessageBox.Show("Valor zerado, aumente o valor ou carregue duas imagens para realizar a subtração.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+                }
 
-                    int r = pixelImg1.R - pixelImg2.R;
-                    int g = pixelImg1.G - pixelImg2.G;
-                    int b = pixelImg1.B - pixelImg2.B;
+                if (img1.Width != img2.Width || img1.Height != img2.Height)
+                {
+                    MessageBox.Show("As imagens devem ter as mesmas dimensões.",
+                                    "Atenção",
+                                    MessageBoxButtons.OK,
+                                    MessageBoxIcon.Warning);
+                    return;
+                }
 
-                    if (r > 255) r = 255;
-                    if (g > 255) g = 255;
-                    if (b > 255) b = 255;
+                imgFinal = SubtrairDuasImagens(img1, img2);
+                pictureBox3.Image = imgFinal;
+                return;
+            }
+
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a subtração.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = DiminuirBrilho(img1, valor);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap SubtrairDuasImagens(Bitmap imagem1, Bitmap imagem2)
+        {
+            Bitmap resultado = new Bitmap(imagem1.Width, imagem1.Height);
+
+            for (int x = 0; x < imagem1.Width; x++)
+            {
+                for (int y = 0; y < imagem1.Height; y++)
+                {
+                    Color pixel1 = imagem1.GetPixel(x, y);
+                    Color pixel2 = imagem2.GetPixel(x, y);
+
+                    int r = pixel1.R - pixel2.R;
+                    int g = pixel1.G - pixel2.G;
+                    int b = pixel1.B - pixel2.B;
 
                     if (r < 0) r = 0;
                     if (g < 0) g = 0;
                     if (b < 0) b = 0;
 
-                    Color pixelFinal = Color.FromArgb(r, g, b);
-                    imgFinal.SetPixel(i, j, pixelFinal);
+                    Color novoPixel = Color.FromArgb(r, g, b);
+                    resultado.SetPixel(x, y, novoPixel);
                 }
             }
 
-            pictureBox3.Image = imgFinal;
-
+            return resultado;
         }
 
+        private Bitmap DiminuirBrilho(Bitmap imagem, int valor)
+        {
+            Bitmap resultado = new Bitmap(imagem.Width, imagem.Height);
 
+            for (int x = 0; x < imagem.Width; x++)
+            {
+                for (int y = 0; y < imagem.Height; y++)
+                {
+                    Color pixel = imagem.GetPixel(x, y);
+
+                    int r = pixel.R - valor;
+                    int g = pixel.G - valor;
+                    int b = pixel.B - valor;
+
+                    if (r < 0) r = 0;
+                    if (g < 0) g = 0;
+                    if (b < 0) b = 0;
+
+                    Color novoPixel = Color.FromArgb(pixel.A, r, g, b);
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
 
         private void btSalvarImagem_Click(object sender, EventArgs e)
         {
