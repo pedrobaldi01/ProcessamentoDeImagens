@@ -41,11 +41,17 @@
             this.btSubtrairImagens = new System.Windows.Forms.Button();
             this.numUpDown_SomaImgs = new System.Windows.Forms.NumericUpDown();
             this.numUpDown_SubtImgs = new System.Windows.Forms.NumericUpDown();
+            this.numUpDown_MultImgs = new System.Windows.Forms.NumericUpDown();
+            this.btMultiplicarImagens = new System.Windows.Forms.Button();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.btDividirImagens = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SomaImgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SubtImgs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_MultImgs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -163,11 +169,64 @@
             this.numUpDown_SubtImgs.Size = new System.Drawing.Size(94, 31);
             this.numUpDown_SubtImgs.TabIndex = 9;
             // 
+            // numUpDown_MultImgs
+            // 
+            this.numUpDown_MultImgs.DecimalPlaces = 2;
+            this.numUpDown_MultImgs.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numUpDown_MultImgs.Location = new System.Drawing.Point(724, 601);
+            this.numUpDown_MultImgs.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numUpDown_MultImgs.Name = "numUpDown_MultImgs";
+            this.numUpDown_MultImgs.Size = new System.Drawing.Size(94, 31);
+            this.numUpDown_MultImgs.TabIndex = 11;
+            // 
+            // btMultiplicarImagens
+            // 
+            this.btMultiplicarImagens.Location = new System.Drawing.Point(489, 588);
+            this.btMultiplicarImagens.Name = "btMultiplicarImagens";
+            this.btMultiplicarImagens.Size = new System.Drawing.Size(219, 55);
+            this.btMultiplicarImagens.TabIndex = 10;
+            this.btMultiplicarImagens.Text = "Multiplicar imagens";
+            this.btMultiplicarImagens.UseVisualStyleBackColor = true;
+            this.btMultiplicarImagens.Click += new System.EventHandler(this.btMultiplicarImagens_Click);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(724, 698);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(94, 31);
+            this.numericUpDown2.TabIndex = 13;
+            // 
+            // btDividirImagens
+            // 
+            this.btDividirImagens.Location = new System.Drawing.Point(489, 685);
+            this.btDividirImagens.Name = "btDividirImagens";
+            this.btDividirImagens.Size = new System.Drawing.Size(219, 55);
+            this.btDividirImagens.TabIndex = 12;
+            this.btDividirImagens.Text = "Dividir imagens";
+            this.btDividirImagens.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1612, 930);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.btDividirImagens);
+            this.Controls.Add(this.numUpDown_MultImgs);
+            this.Controls.Add(this.btMultiplicarImagens);
             this.Controls.Add(this.numUpDown_SubtImgs);
             this.Controls.Add(this.numUpDown_SomaImgs);
             this.Controls.Add(this.btSubtrairImagens);
@@ -186,6 +245,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SomaImgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SubtImgs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_MultImgs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -205,6 +266,10 @@
         private System.Windows.Forms.Button btSubtrairImagens;
         private System.Windows.Forms.NumericUpDown numUpDown_SomaImgs;
         private System.Windows.Forms.NumericUpDown numUpDown_SubtImgs;
+        private System.Windows.Forms.NumericUpDown numUpDown_MultImgs;
+        private System.Windows.Forms.Button btMultiplicarImagens;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Button btDividirImagens;
     }
 }
 

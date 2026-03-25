@@ -368,6 +368,63 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btMultiplicarImagens_Click(object sender, EventArgs e)
+        {
+            double fator = (double)numUpDown_MultImgs.Value;
+
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a multiplicação.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (fator <= 0)
+            {
+                MessageBox.Show("Informe um valor maior que zero para realizar a multiplicação.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = MultiplicarImagem(img1, fator);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap MultiplicarImagem(Bitmap imagem, double fator)
+        {
+            Bitmap resultado = new Bitmap(imagem.Width, imagem.Height);
+
+            for (int x = 0; x < imagem.Width; x++)
+            {
+                for (int y = 0; y < imagem.Height; y++)
+                {
+                    Color pixel = imagem.GetPixel(x, y);
+
+                    int r = (int)(pixel.R * fator);
+                    int g = (int)(pixel.G * fator);
+                    int b = (int)(pixel.B * fator);
+
+                    // Tratamento de overflow e underflow
+                    if (r > 255) r = 255;
+                    if (g > 255) g = 255;
+                    if (b > 255) b = 255;
+
+                    if (r < 0) r = 0;
+                    if (g < 0) g = 0;
+                    if (b < 0) b = 0;
+
+                    Color novoPixel = Color.FromArgb(pixel.A, r, g, b);
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
         private void btSalvarImagem_Click(object sender, EventArgs e)
         {
             if (imgFinal == null)
@@ -406,7 +463,6 @@ namespace ProcessamentoDeImagens
                 imgFinal.Save(saveFileDialog1.FileName, format);
             }
         }
-
 
     }
 }
