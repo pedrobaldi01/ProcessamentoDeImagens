@@ -43,19 +43,23 @@
             this.numUpDown_SubtImgs = new System.Windows.Forms.NumericUpDown();
             this.numUpDown_MultImgs = new System.Windows.Forms.NumericUpDown();
             this.btMultiplicarImagens = new System.Windows.Forms.Button();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.numUpDown_DividImgs = new System.Windows.Forms.NumericUpDown();
             this.btDividirImagens = new System.Windows.Forms.Button();
             this.btGrayScale = new System.Windows.Forms.Button();
             this.btInvertHorz = new System.Windows.Forms.Button();
             this.btInvertVert = new System.Windows.Forms.Button();
             this.btDiferencaImgs = new System.Windows.Forms.Button();
+            this.btBlending = new System.Windows.Forms.Button();
+            this.numUpDown_Blending = new System.Windows.Forms.NumericUpDown();
+            this.btMediaImgs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SomaImgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SubtImgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_MultImgs)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_DividImgs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -224,25 +228,25 @@
             this.btMultiplicarImagens.UseVisualStyleBackColor = true;
             this.btMultiplicarImagens.Click += new System.EventHandler(this.btMultiplicarImagens_Click);
             // 
-            // numericUpDown2
+            // numUpDown_DividImgs
             // 
-            this.numericUpDown2.DecimalPlaces = 2;
-            this.numericUpDown2.Increment = new decimal(new int[] {
+            this.numUpDown_DividImgs.DecimalPlaces = 2;
+            this.numUpDown_DividImgs.Increment = new decimal(new int[] {
             10,
             0,
             0,
             131072});
-            this.numericUpDown2.Location = new System.Drawing.Point(362, 363);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
+            this.numUpDown_DividImgs.Location = new System.Drawing.Point(362, 363);
+            this.numUpDown_DividImgs.Margin = new System.Windows.Forms.Padding(2);
+            this.numUpDown_DividImgs.Maximum = new decimal(new int[] {
             5,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(47, 20);
-            this.numericUpDown2.TabIndex = 13;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.numUpDown_DividImgs.Name = "numUpDown_DividImgs";
+            this.numUpDown_DividImgs.Size = new System.Drawing.Size(47, 20);
+            this.numUpDown_DividImgs.TabIndex = 13;
+            this.numUpDown_DividImgs.Value = new decimal(new int[] {
             1,
             0,
             0,
@@ -303,16 +307,60 @@
             this.btDiferencaImgs.UseVisualStyleBackColor = true;
             this.btDiferencaImgs.Click += new System.EventHandler(this.btDiferencaImgs_Click);
             // 
+            // btBlending
+            // 
+            this.btBlending.Location = new System.Drawing.Point(425, 356);
+            this.btBlending.Margin = new System.Windows.Forms.Padding(2);
+            this.btBlending.Name = "btBlending";
+            this.btBlending.Size = new System.Drawing.Size(110, 29);
+            this.btBlending.TabIndex = 18;
+            this.btBlending.Text = "Blending";
+            this.btBlending.UseVisualStyleBackColor = true;
+            this.btBlending.Click += new System.EventHandler(this.btBlending_Click);
+            // 
+            // numUpDown_Blending
+            // 
+            this.numUpDown_Blending.DecimalPlaces = 2;
+            this.numUpDown_Blending.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numUpDown_Blending.Location = new System.Drawing.Point(542, 362);
+            this.numUpDown_Blending.Margin = new System.Windows.Forms.Padding(2);
+            this.numUpDown_Blending.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUpDown_Blending.Name = "numUpDown_Blending";
+            this.numUpDown_Blending.Size = new System.Drawing.Size(47, 20);
+            this.numUpDown_Blending.TabIndex = 19;
+            // 
+            // btMediaImgs
+            // 
+            this.btMediaImgs.Location = new System.Drawing.Point(551, 414);
+            this.btMediaImgs.Margin = new System.Windows.Forms.Padding(2);
+            this.btMediaImgs.Name = "btMediaImgs";
+            this.btMediaImgs.Size = new System.Drawing.Size(110, 29);
+            this.btMediaImgs.TabIndex = 20;
+            this.btMediaImgs.Text = "Média";
+            this.btMediaImgs.UseVisualStyleBackColor = true;
+            this.btMediaImgs.Click += new System.EventHandler(this.btMediaImgs_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 484);
+            this.Controls.Add(this.btMediaImgs);
+            this.Controls.Add(this.numUpDown_Blending);
+            this.Controls.Add(this.btBlending);
             this.Controls.Add(this.btDiferencaImgs);
             this.Controls.Add(this.btInvertVert);
             this.Controls.Add(this.btInvertHorz);
             this.Controls.Add(this.btGrayScale);
-            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.numUpDown_DividImgs);
             this.Controls.Add(this.btDividirImagens);
             this.Controls.Add(this.numUpDown_MultImgs);
             this.Controls.Add(this.btMultiplicarImagens);
@@ -336,7 +384,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SomaImgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_SubtImgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_MultImgs)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_DividImgs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -358,12 +407,15 @@
         private System.Windows.Forms.NumericUpDown numUpDown_SubtImgs;
         private System.Windows.Forms.NumericUpDown numUpDown_MultImgs;
         private System.Windows.Forms.Button btMultiplicarImagens;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.NumericUpDown numUpDown_DividImgs;
         private System.Windows.Forms.Button btDividirImagens;
         private System.Windows.Forms.Button btGrayScale;
         private System.Windows.Forms.Button btInvertHorz;
         private System.Windows.Forms.Button btInvertVert;
         private System.Windows.Forms.Button btDiferencaImgs;
+        private System.Windows.Forms.Button btBlending;
+        private System.Windows.Forms.NumericUpDown numUpDown_Blending;
+        private System.Windows.Forms.Button btMediaImgs;
     }
 }
 

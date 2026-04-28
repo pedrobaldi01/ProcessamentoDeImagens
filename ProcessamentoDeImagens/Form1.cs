@@ -582,8 +582,108 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btBlending_Click(object sender, EventArgs e)
+        {
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue as duas imagens.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
 
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter o mesmo tamanho.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
 
+            double alpha = (double)numUpDown_Blending.Value; // ex: 0.0 até 1.0
+
+            imgFinal = Blending(img1, img2, alpha);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap Blending(Bitmap img1, Bitmap img2, double alpha)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+                    Color p2 = img2.GetPixel(x, y);
+
+                    int r = (int)(alpha * p1.R + (1 - alpha) * p2.R);
+                    int g = (int)(alpha * p1.G + (1 - alpha) * p2.G);
+                    int b = (int)(alpha * p1.B + (1 - alpha) * p2.B);
+
+                    // garantir que não passe de 255
+                    r = Math.Min(255, r);
+                    g = Math.Min(255, g);
+                    b = Math.Min(255, b);
+
+                    Color novoPixel = Color.FromArgb(r, g, b);
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
+        private void btMediaImgs_Click(object sender, EventArgs e)
+        {
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue as duas imagens.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter o mesmo tamanho.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = Media(img1, img2);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap Media(Bitmap img1, Bitmap img2)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+                    Color p2 = img2.GetPixel(x, y);
+
+                    int r = (p1.R + p2.R) / 2;
+                    int g = (p1.G + p2.G) / 2;
+                    int b = (p1.B + p2.B) / 2;
+
+                    Color novoPixel = Color.FromArgb(r, g, b);
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
 
 
 
@@ -626,6 +726,7 @@ namespace ProcessamentoDeImagens
                 imgFinal.Save(saveFileDialog1.FileName, format);
             }
         }
+
 
     }
 
