@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ProcessamentoDeImagens
 {
@@ -36,7 +37,7 @@ namespace ProcessamentoDeImagens
         byte[,] vimgFinalG;
         byte[,] vimgFinalB;
         byte[,] vimgFinalA;
-        
+
 
 
         public Form1()
@@ -228,16 +229,16 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-        private Bitmap SomarDuasImagens(Bitmap imagem1, Bitmap imagem2)
+        private Bitmap SomarDuasImagens(Bitmap img1, Bitmap img2)
         {
-            Bitmap resultado = new Bitmap(imagem1.Width, imagem1.Height);
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
 
-            for (int x = 0; x < imagem1.Width; x++)
+            for (int x = 0; x < img1.Width; x++)
             {
-                for (int y = 0; y < imagem1.Height; y++)
+                for (int y = 0; y < img1.Height; y++)
                 {
-                    Color pixel1 = imagem1.GetPixel(x, y);
-                    Color pixel2 = imagem2.GetPixel(x, y);
+                    Color pixel1 = img1.GetPixel(x, y);
+                    Color pixel2 = img2.GetPixel(x, y);
 
                     int r = pixel1.R + pixel2.R;
                     int g = pixel1.G + pixel2.G;
@@ -285,7 +286,7 @@ namespace ProcessamentoDeImagens
                                 "Atenção",
                                 MessageBoxButtons.OK,
                                 MessageBoxIcon.Warning);
-                return;
+                    return;
                 }
 
                 if (img1.Width != img2.Width || img1.Height != img2.Height)
@@ -315,16 +316,16 @@ namespace ProcessamentoDeImagens
             pictureBox3.Image = imgFinal;
         }
 
-        private Bitmap SubtrairDuasImagens(Bitmap imagem1, Bitmap imagem2)
+        private Bitmap SubtrairDuasImagens(Bitmap img1, Bitmap img2)
         {
-            Bitmap resultado = new Bitmap(imagem1.Width, imagem1.Height);
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
 
-            for (int x = 0; x < imagem1.Width; x++)
+            for (int x = 0; x < img1.Width; x++)
             {
-                for (int y = 0; y < imagem1.Height; y++)
+                for (int y = 0; y < img1.Height; y++)
                 {
-                    Color pixel1 = imagem1.GetPixel(x, y);
-                    Color pixel2 = imagem2.GetPixel(x, y);
+                    Color pixel1 = img1.GetPixel(x, y);
+                    Color pixel2 = img2.GetPixel(x, y);
 
                     int r = pixel1.R - pixel2.R;
                     int g = pixel1.G - pixel2.G;
@@ -342,15 +343,15 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-        private Bitmap DiminuirBrilho(Bitmap imagem, int valor)
+        private Bitmap DiminuirBrilho(Bitmap img1, int valor)
         {
-            Bitmap resultado = new Bitmap(imagem.Width, imagem.Height);
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
 
-            for (int x = 0; x < imagem.Width; x++)
+            for (int x = 0; x < img1.Width; x++)
             {
-                for (int y = 0; y < imagem.Height; y++)
+                for (int y = 0; y < img1.Height; y++)
                 {
-                    Color pixel = imagem.GetPixel(x, y);
+                    Color pixel = img1.GetPixel(x, y);
 
                     int r = pixel.R - valor;
                     int g = pixel.G - valor;
@@ -394,15 +395,15 @@ namespace ProcessamentoDeImagens
             pictureBox3.Image = imgFinal;
         }
 
-        private Bitmap MultiplicarImagem(Bitmap imagem, double fator)
+        private Bitmap MultiplicarImagem(Bitmap img1, double fator)
         {
-            Bitmap resultado = new Bitmap(imagem.Width, imagem.Height);
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
 
-            for (int x = 0; x < imagem.Width; x++)
+            for (int x = 0; x < img1.Width; x++)
             {
-                for (int y = 0; y < imagem.Height; y++)
+                for (int y = 0; y < img1.Height; y++)
                 {
-                    Color pixel = imagem.GetPixel(x, y);
+                    Color pixel = img1.GetPixel(x, y);
 
                     int r = (int)(pixel.R * fator);
                     int g = (int)(pixel.G * fator);
@@ -463,6 +464,47 @@ namespace ProcessamentoDeImagens
                 imgFinal.Save(saveFileDialog1.FileName, format);
             }
         }
+
+        private void btGrayScale_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a alteração.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+            imgFinal = GrayScale(img1);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap GrayScale(Bitmap img1)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color pixel = img1.GetPixel(x, y);
+
+                    byte intensidade = Convert.ToByte((pixel.R + pixel.G + pixel.B) / 3);
+
+                    Color novoPixel = Color.FromArgb(
+                        pixel.A,
+                        intensidade,
+                        intensidade,
+                        intensidade
+                    );
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
 
     }
 }
