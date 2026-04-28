@@ -505,6 +505,71 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void invertHorz_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a alteração.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+            imgFinal = InverterHorizontal(img1);
+            pictureBox3.Image = imgFinal;
+        }
 
+        private Bitmap InverterHorizontal(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    int novoX = img.Width - 1 - x;
+
+                    resultado.SetPixel(novoX, y, pixel);
+                }
+            }
+
+            return resultado;
+        }
+
+        private void invertVert_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a alteração.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = InverterVertical(img1);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap InverterVertical(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    int novoY = img.Height - 1 - y;
+
+                    resultado.SetPixel(x, novoY, pixel);
+                }
+            }
+
+            return resultado;
+        }
     }
 }

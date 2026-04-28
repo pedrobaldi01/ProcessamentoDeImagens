@@ -46,6 +46,8 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.btDividirImagens = new System.Windows.Forms.Button();
             this.btGrayScale = new System.Windows.Forms.Button();
+            this.invertHorz = new System.Windows.Forms.Button();
+            this.invertVert = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -59,7 +61,7 @@
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox1.Location = new System.Drawing.Point(50, 48);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(151, 157);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -70,7 +72,7 @@
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox3.Location = new System.Drawing.Point(610, 48);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(151, 157);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -81,7 +83,7 @@
             // 
             this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox2.Location = new System.Drawing.Point(244, 48);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(151, 157);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -95,7 +97,7 @@
             // btCarregarImagem
             // 
             this.btCarregarImagem.Location = new System.Drawing.Point(70, 223);
-            this.btCarregarImagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btCarregarImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btCarregarImagem.Name = "btCarregarImagem";
             this.btCarregarImagem.Size = new System.Drawing.Size(110, 29);
             this.btCarregarImagem.TabIndex = 3;
@@ -106,7 +108,7 @@
             // btSalvarImagem
             // 
             this.btSalvarImagem.Location = new System.Drawing.Point(639, 223);
-            this.btSalvarImagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btSalvarImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btSalvarImagem.Name = "btSalvarImagem";
             this.btSalvarImagem.Size = new System.Drawing.Size(93, 29);
             this.btSalvarImagem.TabIndex = 4;
@@ -117,7 +119,7 @@
             // btCarregarImagem2
             // 
             this.btCarregarImagem2.Location = new System.Drawing.Point(265, 223);
-            this.btCarregarImagem2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btCarregarImagem2.Margin = new System.Windows.Forms.Padding(2);
             this.btCarregarImagem2.Name = "btCarregarImagem2";
             this.btCarregarImagem2.Size = new System.Drawing.Size(110, 29);
             this.btCarregarImagem2.TabIndex = 5;
@@ -128,7 +130,7 @@
             // btMostrarImagem
             // 
             this.btMostrarImagem.Location = new System.Drawing.Point(0, 0);
-            this.btMostrarImagem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btMostrarImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btMostrarImagem.Name = "btMostrarImagem";
             this.btMostrarImagem.Size = new System.Drawing.Size(38, 12);
             this.btMostrarImagem.TabIndex = 0;
@@ -136,7 +138,7 @@
             // btSomarImagens
             // 
             this.btSomarImagens.Location = new System.Drawing.Point(50, 306);
-            this.btSomarImagens.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btSomarImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btSomarImagens.Name = "btSomarImagens";
             this.btSomarImagens.Size = new System.Drawing.Size(110, 29);
             this.btSomarImagens.TabIndex = 6;
@@ -147,7 +149,7 @@
             // btSubtrairImagens
             // 
             this.btSubtrairImagens.Location = new System.Drawing.Point(50, 356);
-            this.btSubtrairImagens.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btSubtrairImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btSubtrairImagens.Name = "btSubtrairImagens";
             this.btSubtrairImagens.Size = new System.Drawing.Size(110, 29);
             this.btSubtrairImagens.TabIndex = 7;
@@ -158,7 +160,7 @@
             // numUpDown_SomaImgs
             // 
             this.numUpDown_SomaImgs.Location = new System.Drawing.Point(167, 313);
-            this.numUpDown_SomaImgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numUpDown_SomaImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_SomaImgs.Maximum = new decimal(new int[] {
             255,
             0,
@@ -171,7 +173,7 @@
             // numUpDown_SubtImgs
             // 
             this.numUpDown_SubtImgs.Location = new System.Drawing.Point(167, 363);
-            this.numUpDown_SubtImgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numUpDown_SubtImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_SubtImgs.Maximum = new decimal(new int[] {
             255,
             0,
@@ -190,20 +192,30 @@
             0,
             65536});
             this.numUpDown_MultImgs.Location = new System.Drawing.Point(362, 313);
-            this.numUpDown_MultImgs.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numUpDown_MultImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_MultImgs.Maximum = new decimal(new int[] {
             5,
+            0,
+            0,
+            0});
+            this.numUpDown_MultImgs.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
             this.numUpDown_MultImgs.Name = "numUpDown_MultImgs";
             this.numUpDown_MultImgs.Size = new System.Drawing.Size(47, 20);
             this.numUpDown_MultImgs.TabIndex = 11;
+            this.numUpDown_MultImgs.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btMultiplicarImagens
             // 
             this.btMultiplicarImagens.Location = new System.Drawing.Point(244, 306);
-            this.btMultiplicarImagens.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btMultiplicarImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btMultiplicarImagens.Name = "btMultiplicarImagens";
             this.btMultiplicarImagens.Size = new System.Drawing.Size(110, 29);
             this.btMultiplicarImagens.TabIndex = 10;
@@ -220,7 +232,7 @@
             0,
             131072});
             this.numericUpDown2.Location = new System.Drawing.Point(362, 363);
-            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericUpDown2.Margin = new System.Windows.Forms.Padding(2);
             this.numericUpDown2.Maximum = new decimal(new int[] {
             5,
             0,
@@ -238,7 +250,7 @@
             // btDividirImagens
             // 
             this.btDividirImagens.Location = new System.Drawing.Point(244, 356);
-            this.btDividirImagens.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btDividirImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btDividirImagens.Name = "btDividirImagens";
             this.btDividirImagens.Size = new System.Drawing.Size(110, 29);
             this.btDividirImagens.TabIndex = 12;
@@ -248,7 +260,7 @@
             // btGrayScale
             // 
             this.btGrayScale.Location = new System.Drawing.Point(50, 410);
-            this.btGrayScale.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btGrayScale.Margin = new System.Windows.Forms.Padding(2);
             this.btGrayScale.Name = "btGrayScale";
             this.btGrayScale.Size = new System.Drawing.Size(110, 29);
             this.btGrayScale.TabIndex = 14;
@@ -256,11 +268,35 @@
             this.btGrayScale.UseVisualStyleBackColor = true;
             this.btGrayScale.Click += new System.EventHandler(this.btGrayScale_Click);
             // 
+            // invertHorz
+            // 
+            this.invertHorz.Location = new System.Drawing.Point(175, 410);
+            this.invertHorz.Margin = new System.Windows.Forms.Padding(2);
+            this.invertHorz.Name = "invertHorz";
+            this.invertHorz.Size = new System.Drawing.Size(110, 29);
+            this.invertHorz.TabIndex = 15;
+            this.invertHorz.Text = "Inverter Horizontal";
+            this.invertHorz.UseVisualStyleBackColor = true;
+            this.invertHorz.Click += new System.EventHandler(this.invertHorz_Click);
+            // 
+            // invertVert
+            // 
+            this.invertVert.Location = new System.Drawing.Point(300, 410);
+            this.invertVert.Margin = new System.Windows.Forms.Padding(2);
+            this.invertVert.Name = "invertVert";
+            this.invertVert.Size = new System.Drawing.Size(110, 29);
+            this.invertVert.TabIndex = 16;
+            this.invertVert.Text = "Inverter Vertical";
+            this.invertVert.UseVisualStyleBackColor = true;
+            this.invertVert.Click += new System.EventHandler(this.invertVert_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(758, 484);
+            this.ClientSize = new System.Drawing.Size(900, 484);
+            this.Controls.Add(this.invertVert);
+            this.Controls.Add(this.invertHorz);
             this.Controls.Add(this.btGrayScale);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.btDividirImagens);
@@ -277,7 +313,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -311,6 +347,8 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Button btDividirImagens;
         private System.Windows.Forms.Button btGrayScale;
+        private System.Windows.Forms.Button invertHorz;
+        private System.Windows.Forms.Button invertVert;
     }
 }
 
