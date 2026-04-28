@@ -46,8 +46,9 @@
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.btDividirImagens = new System.Windows.Forms.Button();
             this.btGrayScale = new System.Windows.Forms.Button();
-            this.invertHorz = new System.Windows.Forms.Button();
-            this.invertVert = new System.Windows.Forms.Button();
+            this.btInvertHorz = new System.Windows.Forms.Button();
+            this.btInvertVert = new System.Windows.Forms.Button();
+            this.btDiferencaImgs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -268,35 +269,48 @@
             this.btGrayScale.UseVisualStyleBackColor = true;
             this.btGrayScale.Click += new System.EventHandler(this.btGrayScale_Click);
             // 
-            // invertHorz
+            // btInvertHorz
             // 
-            this.invertHorz.Location = new System.Drawing.Point(175, 410);
-            this.invertHorz.Margin = new System.Windows.Forms.Padding(2);
-            this.invertHorz.Name = "invertHorz";
-            this.invertHorz.Size = new System.Drawing.Size(110, 29);
-            this.invertHorz.TabIndex = 15;
-            this.invertHorz.Text = "Inverter Horizontal";
-            this.invertHorz.UseVisualStyleBackColor = true;
-            this.invertHorz.Click += new System.EventHandler(this.invertHorz_Click);
+            this.btInvertHorz.Location = new System.Drawing.Point(175, 410);
+            this.btInvertHorz.Margin = new System.Windows.Forms.Padding(2);
+            this.btInvertHorz.Name = "btInvertHorz";
+            this.btInvertHorz.Size = new System.Drawing.Size(110, 29);
+            this.btInvertHorz.TabIndex = 15;
+            this.btInvertHorz.Text = "Inverter Horizontal";
+            this.btInvertHorz.UseVisualStyleBackColor = true;
+            this.btInvertHorz.Click += new System.EventHandler(this.btInvertHorz_Click);
             // 
-            // invertVert
+            // btInvertVert
             // 
-            this.invertVert.Location = new System.Drawing.Point(300, 410);
-            this.invertVert.Margin = new System.Windows.Forms.Padding(2);
-            this.invertVert.Name = "invertVert";
-            this.invertVert.Size = new System.Drawing.Size(110, 29);
-            this.invertVert.TabIndex = 16;
-            this.invertVert.Text = "Inverter Vertical";
-            this.invertVert.UseVisualStyleBackColor = true;
-            this.invertVert.Click += new System.EventHandler(this.invertVert_Click);
+            this.btInvertVert.Location = new System.Drawing.Point(300, 410);
+            this.btInvertVert.Margin = new System.Windows.Forms.Padding(2);
+            this.btInvertVert.Name = "btInvertVert";
+            this.btInvertVert.Size = new System.Drawing.Size(110, 29);
+            this.btInvertVert.TabIndex = 16;
+            this.btInvertVert.Text = "Inverter Vertical";
+            this.btInvertVert.UseVisualStyleBackColor = true;
+            this.btInvertVert.Click += new System.EventHandler(this.btInvertVert_Click);
+            // 
+            // btDiferencaImgs
+            // 
+            this.btDiferencaImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDiferencaImgs.Location = new System.Drawing.Point(425, 405);
+            this.btDiferencaImgs.Margin = new System.Windows.Forms.Padding(2);
+            this.btDiferencaImgs.Name = "btDiferencaImgs";
+            this.btDiferencaImgs.Size = new System.Drawing.Size(110, 38);
+            this.btDiferencaImgs.TabIndex = 17;
+            this.btDiferencaImgs.Text = "Diferenca entre imagens";
+            this.btDiferencaImgs.UseVisualStyleBackColor = true;
+            this.btDiferencaImgs.Click += new System.EventHandler(this.btDiferencaImgs_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 484);
-            this.Controls.Add(this.invertVert);
-            this.Controls.Add(this.invertHorz);
+            this.Controls.Add(this.btDiferencaImgs);
+            this.Controls.Add(this.btInvertVert);
+            this.Controls.Add(this.btInvertHorz);
             this.Controls.Add(this.btGrayScale);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.btDividirImagens);
@@ -347,8 +361,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Button btDividirImagens;
         private System.Windows.Forms.Button btGrayScale;
-        private System.Windows.Forms.Button invertHorz;
-        private System.Windows.Forms.Button invertVert;
+        private System.Windows.Forms.Button btInvertHorz;
+        private System.Windows.Forms.Button btInvertVert;
+        private System.Windows.Forms.Button btDiferencaImgs;
     }
 }
 

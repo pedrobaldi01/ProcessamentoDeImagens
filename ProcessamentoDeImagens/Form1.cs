@@ -426,45 +426,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-        private void btSalvarImagem_Click(object sender, EventArgs e)
-        {
-            if (imgFinal == null)
-                return;
-
-            // Configurações iniciais da saveFileDialog1
-            var filePath = string.Empty;
-            saveFileDialog1.InitialDirectory = "c:\\";
-            saveFileDialog1.Filter = "TIFF image (*.tif)|*.tif|JPG image (*.jpg)|*.jpg|BMP image (*.bmp)|*.bmp|PNG image (*.png)|*.png|All files (*.*)|*.*";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
-
-
-            ImageFormat format = imgFinal.RawFormat;
-
-            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                string ext = System.IO.Path.GetExtension(saveFileDialog1.FileName);
-                switch (ext)
-                {
-                    case ".jpg":
-                        format = ImageFormat.Jpeg;
-                        break;
-                    case ".bmp":
-                        format = ImageFormat.Bmp;
-                        break;
-                    case ".tif":
-                        format = ImageFormat.Tiff;
-                        break;
-                    case ".png":
-                        format = ImageFormat.Png;
-                        break;
-                }
-
-                //pictureBox3.Image.Save(saveFileDialog1.FileName, format);
-                imgFinal.Save(saveFileDialog1.FileName, format);
-            }
-        }
-
+        
         private void btGrayScale_Click(object sender, EventArgs e)
         {
             if (img1 == null)
@@ -505,7 +467,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-        private void invertHorz_Click(object sender, EventArgs e)
+        private void btInvertHorz_Click(object sender, EventArgs e)
         {
             if (img1 == null)
             {
@@ -538,7 +500,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-        private void invertVert_Click(object sender, EventArgs e)
+        private void btInvertVert_Click(object sender, EventArgs e)
         {
             if (img1 == null)
             {
@@ -571,5 +533,100 @@ namespace ProcessamentoDeImagens
 
             return resultado;
         }
+
+        private void btDiferencaImgs_Click(object sender, EventArgs e)
+        {
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue duas imagens para realizar a subtração.",
+                            "Atenção",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter as mesmas dimensões.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = Diferenca(img1, img2);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap Diferenca(Bitmap img1, Bitmap img2)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+                    Color p2 = img2.GetPixel(x, y);
+
+                    int r = Math.Abs(p1.R - p2.R);
+                    int g = Math.Abs(p1.G - p2.G);
+                    int b = Math.Abs(p1.B - p2.B);
+
+                    Color novoPixel = Color.FromArgb(r, g, b);
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
+
+
+
+
+
+
+        private void btSalvarImagem_Click(object sender, EventArgs e)
+        {
+            if (imgFinal == null)
+                return;
+
+            // Configurações iniciais da saveFileDialog1
+            var filePath = string.Empty;
+            saveFileDialog1.InitialDirectory = "c:\\";
+            saveFileDialog1.Filter = "TIFF image (*.tif)|*.tif|JPG image (*.jpg)|*.jpg|BMP image (*.bmp)|*.bmp|PNG image (*.png)|*.png|All files (*.*)|*.*";
+            saveFileDialog1.FilterIndex = 2;
+            saveFileDialog1.RestoreDirectory = true;
+
+
+            ImageFormat format = imgFinal.RawFormat;
+
+            if (saveFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string ext = System.IO.Path.GetExtension(saveFileDialog1.FileName);
+                switch (ext)
+                {
+                    case ".jpg":
+                        format = ImageFormat.Jpeg;
+                        break;
+                    case ".bmp":
+                        format = ImageFormat.Bmp;
+                        break;
+                    case ".tif":
+                        format = ImageFormat.Tiff;
+                        break;
+                    case ".png":
+                        format = ImageFormat.Png;
+                        break;
+                }
+
+                //pictureBox3.Image.Save(saveFileDialog1.FileName, format);
+                imgFinal.Save(saveFileDialog1.FileName, format);
+            }
+        }
+
     }
+
 }
