@@ -685,6 +685,56 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        // Operacoes logicas
+
+
+        // ...
+
+        private void btLimiarizacao_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            int limiar = (int)numUpDown_Limiarizacao.Value;
+
+            imgFinal = Limiarizacao(img1, limiar);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap Limiarizacao(Bitmap img, int limiar)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    int intensidade = (pixel.R + pixel.G + pixel.B) / 3;
+
+                    Color novoPixel;
+
+                    if (intensidade >= limiar)
+                        novoPixel = Color.White;
+                    else
+                        novoPixel = Color.Black;
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
+
+
 
 
 
@@ -726,7 +776,6 @@ namespace ProcessamentoDeImagens
                 imgFinal.Save(saveFileDialog1.FileName, format);
             }
         }
-
 
     }
 

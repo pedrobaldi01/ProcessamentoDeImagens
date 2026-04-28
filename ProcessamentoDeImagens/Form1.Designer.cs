@@ -52,6 +52,8 @@
             this.btBlending = new System.Windows.Forms.Button();
             this.numUpDown_Blending = new System.Windows.Forms.NumericUpDown();
             this.btMediaImgs = new System.Windows.Forms.Button();
+            this.numUpDown_Limiarizacao = new System.Windows.Forms.NumericUpDown();
+            this.btLimiarizacao = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -60,6 +62,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_MultImgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_DividImgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Limiarizacao)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -348,11 +351,37 @@
             this.btMediaImgs.UseVisualStyleBackColor = true;
             this.btMediaImgs.Click += new System.EventHandler(this.btMediaImgs_Click);
             // 
+            // numUpDown_Limiarizacao
+            // 
+            this.numUpDown_Limiarizacao.Location = new System.Drawing.Point(542, 313);
+            this.numUpDown_Limiarizacao.Margin = new System.Windows.Forms.Padding(2);
+            this.numUpDown_Limiarizacao.Maximum = new decimal(new int[] {
+            255,
+            0,
+            0,
+            0});
+            this.numUpDown_Limiarizacao.Name = "numUpDown_Limiarizacao";
+            this.numUpDown_Limiarizacao.Size = new System.Drawing.Size(47, 20);
+            this.numUpDown_Limiarizacao.TabIndex = 22;
+            // 
+            // btLimiarizacao
+            // 
+            this.btLimiarizacao.Location = new System.Drawing.Point(425, 307);
+            this.btLimiarizacao.Margin = new System.Windows.Forms.Padding(2);
+            this.btLimiarizacao.Name = "btLimiarizacao";
+            this.btLimiarizacao.Size = new System.Drawing.Size(110, 29);
+            this.btLimiarizacao.TabIndex = 21;
+            this.btLimiarizacao.Text = "Limiarização";
+            this.btLimiarizacao.UseVisualStyleBackColor = true;
+            this.btLimiarizacao.Click += new System.EventHandler(this.btLimiarizacao_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 484);
+            this.Controls.Add(this.numUpDown_Limiarizacao);
+            this.Controls.Add(this.btLimiarizacao);
             this.Controls.Add(this.btMediaImgs);
             this.Controls.Add(this.numUpDown_Blending);
             this.Controls.Add(this.btBlending);
@@ -386,6 +415,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_MultImgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_DividImgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Limiarizacao)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -416,6 +446,8 @@
         private System.Windows.Forms.Button btBlending;
         private System.Windows.Forms.NumericUpDown numUpDown_Blending;
         private System.Windows.Forms.Button btMediaImgs;
+        private System.Windows.Forms.NumericUpDown numUpDown_Limiarizacao;
+        private System.Windows.Forms.Button btLimiarizacao;
     }
 }
 
