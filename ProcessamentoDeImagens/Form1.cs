@@ -369,6 +369,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+
         private void btMultiplicarImagens_Click(object sender, EventArgs e)
         {
             double fator = (double)numUpDown_MultImgs.Value;
@@ -467,6 +468,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+
         private void btInvertHorz_Click(object sender, EventArgs e)
         {
             if (img1 == null)
@@ -499,6 +501,7 @@ namespace ProcessamentoDeImagens
 
             return resultado;
         }
+
 
         private void btInvertVert_Click(object sender, EventArgs e)
         {
@@ -533,6 +536,7 @@ namespace ProcessamentoDeImagens
 
             return resultado;
         }
+
 
         private void btDiferencaImgs_Click(object sender, EventArgs e)
         {
@@ -581,6 +585,7 @@ namespace ProcessamentoDeImagens
 
             return resultado;
         }
+
 
         private void btBlending_Click(object sender, EventArgs e)
         {
@@ -636,6 +641,7 @@ namespace ProcessamentoDeImagens
 
             return resultado;
         }
+
 
         private void btMediaImgs_Click(object sender, EventArgs e)
         {
@@ -734,8 +740,43 @@ namespace ProcessamentoDeImagens
         }
 
 
+        private void btNegativoImgs_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
 
+            imgFinal = Negativo(img1);
+            pictureBox3.Image = imgFinal;
+        }
 
+        private Bitmap Negativo(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    int r = 255 - pixel.R;
+                    int g = 255 - pixel.G;
+                    int b = 255 - pixel.B;
+
+                    Color novoPixel = Color.FromArgb(pixel.A, r, g, b);
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
 
 
         private void btSalvarImagem_Click(object sender, EventArgs e)

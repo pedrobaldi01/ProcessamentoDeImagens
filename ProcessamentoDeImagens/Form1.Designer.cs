@@ -54,6 +54,7 @@
             this.btMediaImgs = new System.Windows.Forms.Button();
             this.numUpDown_Limiarizacao = new System.Windows.Forms.NumericUpDown();
             this.btLimiarizacao = new System.Windows.Forms.Button();
+            this.btNegativoImgs = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -375,11 +376,23 @@
             this.btLimiarizacao.UseVisualStyleBackColor = true;
             this.btLimiarizacao.Click += new System.EventHandler(this.btLimiarizacao_Click);
             // 
+            // btNegativoImgs
+            // 
+            this.btNegativoImgs.Location = new System.Drawing.Point(676, 414);
+            this.btNegativoImgs.Margin = new System.Windows.Forms.Padding(2);
+            this.btNegativoImgs.Name = "btNegativoImgs";
+            this.btNegativoImgs.Size = new System.Drawing.Size(110, 29);
+            this.btNegativoImgs.TabIndex = 23;
+            this.btNegativoImgs.Text = "Negativo";
+            this.btNegativoImgs.UseVisualStyleBackColor = true;
+            this.btNegativoImgs.Click += new System.EventHandler(this.btNegativoImgs_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(900, 484);
+            this.Controls.Add(this.btNegativoImgs);
             this.Controls.Add(this.numUpDown_Limiarizacao);
             this.Controls.Add(this.btLimiarizacao);
             this.Controls.Add(this.btMediaImgs);
@@ -448,6 +461,7 @@
         private System.Windows.Forms.Button btMediaImgs;
         private System.Windows.Forms.NumericUpDown numUpDown_Limiarizacao;
         private System.Windows.Forms.Button btLimiarizacao;
+        private System.Windows.Forms.Button btNegativoImgs;
     }
 }
 
