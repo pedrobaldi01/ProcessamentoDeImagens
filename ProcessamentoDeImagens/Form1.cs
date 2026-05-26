@@ -586,7 +586,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-
+        // Blending
         private void btBlending_Click(object sender, EventArgs e)
         {
             if (img1 == null || img2 == null)
@@ -624,9 +624,9 @@ namespace ProcessamentoDeImagens
                     Color p1 = img1.GetPixel(x, y);
                     Color p2 = img2.GetPixel(x, y);
 
-                    int r = (int)(alpha * p1.R + (1 - alpha) * p2.R);
-                    int g = (int)(alpha * p1.G + (1 - alpha) * p2.G);
-                    int b = (int)(alpha * p1.B + (1 - alpha) * p2.B);
+                    int r = (int)Math.Round(alpha * p1.R + (1 - alpha) * p2.R);
+                    int g = (int)Math.Round(alpha * p1.G + (1 - alpha) * p2.G);
+                    int b = (int)Math.Round(alpha * p1.B + (1 - alpha) * p2.B);
 
                     // garantir que não passe de 255
                     r = Math.Min(255, r);
@@ -642,7 +642,7 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
-
+        // Media de imagens
         private void btMediaImgs_Click(object sender, EventArgs e)
         {
             if (img1 == null || img2 == null)
@@ -693,8 +693,159 @@ namespace ProcessamentoDeImagens
 
         // Operacoes logicas
 
+        private void btAND_Click(object sender, EventArgs e)
+        {
+            if (!ValidarDuasImagens("AND"))
+                return;
 
-        // ...
+            imgFinal = AND(img1, img2);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap AND(Bitmap img1, Bitmap img2)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+                    Color p2 = img2.GetPixel(x, y);
+
+                    int valor = ConverterPixelBinario(p1) & ConverterPixelBinario(p2);
+
+                    resultado.SetPixel(x, y, Color.FromArgb(valor, valor, valor));
+                }
+            }
+
+            return resultado;
+        }
+
+        private void btOR_Click(object sender, EventArgs e)
+        {
+            if (!ValidarDuasImagens("OR"))
+                return;
+
+            imgFinal = OR(img1, img2);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap OR(Bitmap img1, Bitmap img2)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+                    Color p2 = img2.GetPixel(x, y);
+
+                    int valor = ConverterPixelBinario(p1) | ConverterPixelBinario(p2);
+
+                    resultado.SetPixel(x, y, Color.FromArgb(valor, valor, valor));
+                }
+            }
+
+            return resultado;
+        }
+
+        private void btNOT_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a operação NOT.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = NOT(img1);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap NOT(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+
+                    int valor = 255 - ConverterPixelBinario(pixel);
+
+                    resultado.SetPixel(x, y, Color.FromArgb(valor, valor, valor));
+                }
+            }
+
+            return resultado;
+        }
+
+        private void btXOR_Click(object sender, EventArgs e)
+        {
+            if (!ValidarDuasImagens("XOR"))
+                return;
+
+            imgFinal = XOR(img1, img2);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap XOR(Bitmap img1, Bitmap img2)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color p1 = img1.GetPixel(x, y);
+                    Color p2 = img2.GetPixel(x, y);
+
+                    int valor = ConverterPixelBinario(p1) ^ ConverterPixelBinario(p2);
+
+                    resultado.SetPixel(x, y, Color.FromArgb(valor, valor, valor));
+                }
+            }
+
+            return resultado;
+        }
+
+        private bool ValidarDuasImagens(string operacao)
+        {
+            if (img1 == null || img2 == null)
+            {
+                MessageBox.Show("Carregue duas imagens para realizar a operação " + operacao + ".",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (img1.Width != img2.Width || img1.Height != img2.Height)
+            {
+                MessageBox.Show("As imagens devem ter as mesmas dimensões.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
+        private int ConverterPixelBinario(Color pixel)
+        {
+            int intensidade = (pixel.R + pixel.G + pixel.B) / 3;
+
+            if (intensidade >= 128)
+                return 255;
+
+            return 0;
+        }
 
         private void btLimiarizacao_Click(object sender, EventArgs e)
         {

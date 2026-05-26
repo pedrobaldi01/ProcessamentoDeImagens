@@ -56,6 +56,11 @@
             this.btLimiarizacao = new System.Windows.Forms.Button();
             this.btNegativoImgs = new System.Windows.Forms.Button();
             this.btMediana = new System.Windows.Forms.Button();
+            this.btAND = new System.Windows.Forms.Button();
+            this.btOR = new System.Windows.Forms.Button();
+            this.btNOT = new System.Windows.Forms.Button();
+            this.btXOR = new System.Windows.Forms.Button();
+            this.boxOpLog = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -65,15 +70,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_DividImgs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Limiarizacao)).BeginInit();
+            this.boxOpLog.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(50, 48);
+            this.pictureBox1.Location = new System.Drawing.Point(45, 48);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(151, 157);
+            this.pictureBox1.Size = new System.Drawing.Size(160, 160);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -84,7 +90,7 @@
             this.pictureBox3.Location = new System.Drawing.Point(610, 48);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(151, 157);
+            this.pictureBox3.Size = new System.Drawing.Size(160, 160);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox3.TabIndex = 1;
             this.pictureBox3.TabStop = false;
@@ -95,7 +101,7 @@
             this.pictureBox2.Location = new System.Drawing.Point(244, 48);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(151, 157);
+            this.pictureBox2.Size = new System.Drawing.Size(160, 160);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 2;
             this.pictureBox2.TabStop = false;
@@ -117,7 +123,7 @@
             // 
             // btSalvarImagem
             // 
-            this.btSalvarImagem.Location = new System.Drawing.Point(639, 223);
+            this.btSalvarImagem.Location = new System.Drawing.Point(644, 223);
             this.btSalvarImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btSalvarImagem.Name = "btSalvarImagem";
             this.btSalvarImagem.Size = new System.Drawing.Size(93, 29);
@@ -128,7 +134,7 @@
             // 
             // btCarregarImagem2
             // 
-            this.btCarregarImagem2.Location = new System.Drawing.Point(265, 223);
+            this.btCarregarImagem2.Location = new System.Drawing.Point(269, 223);
             this.btCarregarImagem2.Margin = new System.Windows.Forms.Padding(2);
             this.btCarregarImagem2.Name = "btCarregarImagem2";
             this.btCarregarImagem2.Size = new System.Drawing.Size(110, 29);
@@ -341,10 +347,15 @@
             this.numUpDown_Blending.Name = "numUpDown_Blending";
             this.numUpDown_Blending.Size = new System.Drawing.Size(47, 20);
             this.numUpDown_Blending.TabIndex = 19;
+            this.numUpDown_Blending.Value = new decimal(new int[] {
+            5,
+            0,
+            0,
+            65536});
             // 
             // btMediaImgs
             // 
-            this.btMediaImgs.Location = new System.Drawing.Point(551, 414);
+            this.btMediaImgs.Location = new System.Drawing.Point(50, 462);
             this.btMediaImgs.Margin = new System.Windows.Forms.Padding(2);
             this.btMediaImgs.Name = "btMediaImgs";
             this.btMediaImgs.Size = new System.Drawing.Size(110, 29);
@@ -379,7 +390,7 @@
             // 
             // btNegativoImgs
             // 
-            this.btNegativoImgs.Location = new System.Drawing.Point(676, 414);
+            this.btNegativoImgs.Location = new System.Drawing.Point(175, 462);
             this.btNegativoImgs.Margin = new System.Windows.Forms.Padding(2);
             this.btNegativoImgs.Name = "btNegativoImgs";
             this.btNegativoImgs.Size = new System.Drawing.Size(110, 29);
@@ -390,7 +401,7 @@
             // 
             // btMediana
             // 
-            this.btMediana.Location = new System.Drawing.Point(610, 356);
+            this.btMediana.Location = new System.Drawing.Point(300, 462);
             this.btMediana.Margin = new System.Windows.Forms.Padding(2);
             this.btMediana.Name = "btMediana";
             this.btMediana.Size = new System.Drawing.Size(110, 29);
@@ -398,12 +409,70 @@
             this.btMediana.Text = "Mediana";
             this.btMediana.UseVisualStyleBackColor = true;
             this.btMediana.Click += new System.EventHandler(this.btMediana_Click);
+            //
+            // btAND
+            //
+            this.btAND.Location = new System.Drawing.Point(19, 18);
+            this.btAND.Margin = new System.Windows.Forms.Padding(2);
+            this.btAND.Name = "btAND";
+            this.btAND.Size = new System.Drawing.Size(50, 29);
+            this.btAND.TabIndex = 25;
+            this.btAND.Text = "AND";
+            this.btAND.UseVisualStyleBackColor = true;
+            this.btAND.Click += new System.EventHandler(this.btAND_Click);
+            //
+            // btOR
+            //
+            this.btOR.Location = new System.Drawing.Point(92, 18);
+            this.btOR.Margin = new System.Windows.Forms.Padding(2);
+            this.btOR.Name = "btOR";
+            this.btOR.Size = new System.Drawing.Size(50, 29);
+            this.btOR.TabIndex = 26;
+            this.btOR.Text = "OR";
+            this.btOR.UseVisualStyleBackColor = true;
+            this.btOR.Click += new System.EventHandler(this.btOR_Click);
+            //
+            // btNOT
+            //
+            this.btNOT.Location = new System.Drawing.Point(19, 67);
+            this.btNOT.Margin = new System.Windows.Forms.Padding(2);
+            this.btNOT.Name = "btNOT";
+            this.btNOT.Size = new System.Drawing.Size(50, 29);
+            this.btNOT.TabIndex = 27;
+            this.btNOT.Text = "NOT";
+            this.btNOT.UseVisualStyleBackColor = true;
+            this.btNOT.Click += new System.EventHandler(this.btNOT_Click);
+            //
+            // btXOR
+            //
+            this.btXOR.Location = new System.Drawing.Point(92, 67);
+            this.btXOR.Margin = new System.Windows.Forms.Padding(2);
+            this.btXOR.Name = "btXOR";
+            this.btXOR.Size = new System.Drawing.Size(50, 29);
+            this.btXOR.TabIndex = 28;
+            this.btXOR.Text = "XOR";
+            this.btXOR.UseVisualStyleBackColor = true;
+            this.btXOR.Click += new System.EventHandler(this.btXOR_Click);
+            //
+            // boxOpLog
+            //
+            this.boxOpLog.Controls.Add(this.btAND);
+            this.boxOpLog.Controls.Add(this.btNOT);
+            this.boxOpLog.Controls.Add(this.btXOR);
+            this.boxOpLog.Controls.Add(this.btOR);
+            this.boxOpLog.Location = new System.Drawing.Point(616, 290);
+            this.boxOpLog.Name = "boxOpLog";
+            this.boxOpLog.Size = new System.Drawing.Size(158, 108);
+            this.boxOpLog.TabIndex = 29;
+            this.boxOpLog.TabStop = false;
+            this.boxOpLog.Text = "Operações lógicas";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 520);
+            this.ClientSize = new System.Drawing.Size(864, 658);
+            this.Controls.Add(this.boxOpLog);
             this.Controls.Add(this.btMediana);
             this.Controls.Add(this.btNegativoImgs);
             this.Controls.Add(this.numUpDown_Limiarizacao);
@@ -442,6 +511,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_DividImgs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Limiarizacao)).EndInit();
+            this.boxOpLog.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -476,6 +546,11 @@
         private System.Windows.Forms.Button btLimiarizacao;
         private System.Windows.Forms.Button btNegativoImgs;
         private System.Windows.Forms.Button btMediana;
+        private System.Windows.Forms.Button btAND;
+        private System.Windows.Forms.Button btOR;
+        private System.Windows.Forms.Button btNOT;
+        private System.Windows.Forms.Button btXOR;
+        private System.Windows.Forms.GroupBox boxOpLog;
     }
 }
 
