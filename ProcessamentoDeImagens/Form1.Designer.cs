@@ -55,6 +55,7 @@
             this.numUpDown_Limiarizacao = new System.Windows.Forms.NumericUpDown();
             this.btLimiarizacao = new System.Windows.Forms.Button();
             this.btNegativoImgs = new System.Windows.Forms.Button();
+            this.btMediana = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -387,11 +388,23 @@
             this.btNegativoImgs.UseVisualStyleBackColor = true;
             this.btNegativoImgs.Click += new System.EventHandler(this.btNegativoImgs_Click);
             // 
+            // btMediana
+            // 
+            this.btMediana.Location = new System.Drawing.Point(610, 356);
+            this.btMediana.Margin = new System.Windows.Forms.Padding(2);
+            this.btMediana.Name = "btMediana";
+            this.btMediana.Size = new System.Drawing.Size(110, 29);
+            this.btMediana.TabIndex = 24;
+            this.btMediana.Text = "Mediana";
+            this.btMediana.UseVisualStyleBackColor = true;
+            this.btMediana.Click += new System.EventHandler(this.btMediana_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(900, 484);
+            this.ClientSize = new System.Drawing.Size(900, 520);
+            this.Controls.Add(this.btMediana);
             this.Controls.Add(this.btNegativoImgs);
             this.Controls.Add(this.numUpDown_Limiarizacao);
             this.Controls.Add(this.btLimiarizacao);
@@ -462,6 +475,7 @@
         private System.Windows.Forms.NumericUpDown numUpDown_Limiarizacao;
         private System.Windows.Forms.Button btLimiarizacao;
         private System.Windows.Forms.Button btNegativoImgs;
+        private System.Windows.Forms.Button btMediana;
     }
 }
 

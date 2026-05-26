@@ -778,6 +778,74 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btMediana_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para aplicar o filtro de mediana.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            imgFinal = FiltroMediana(img1);
+            pictureBox3.Image = imgFinal;
+        }
+
+        private Bitmap FiltroMediana(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    resultado.SetPixel(x, y, img.GetPixel(x, y));
+                }
+            }
+
+            for (int x = 1; x < img.Width - 1; x++)
+            {
+                for (int y = 1; y < img.Height - 1; y++)
+                {
+                    byte[] valoresR = new byte[9];
+                    byte[] valoresG = new byte[9];
+                    byte[] valoresB = new byte[9];
+                    int indice = 0;
+
+                    for (int vizinhoX = x - 1; vizinhoX <= x + 1; vizinhoX++)
+                    {
+                        for (int vizinhoY = y - 1; vizinhoY <= y + 1; vizinhoY++)
+                        {
+                            Color pixelVizinho = img.GetPixel(vizinhoX, vizinhoY);
+
+                            valoresR[indice] = pixelVizinho.R;
+                            valoresG[indice] = pixelVizinho.G;
+                            valoresB[indice] = pixelVizinho.B;
+                            indice++;
+                        }
+                    }
+
+                    Array.Sort(valoresR);
+                    Array.Sort(valoresG);
+                    Array.Sort(valoresB);
+
+                    Color pixelOriginal = img.GetPixel(x, y);
+                    Color novoPixel = Color.FromArgb(
+                        pixelOriginal.A,
+                        valoresR[4],
+                        valoresG[4],
+                        valoresB[4]
+                    );
+
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
 
         private void btSalvarImagem_Click(object sender, EventArgs e)
         {
