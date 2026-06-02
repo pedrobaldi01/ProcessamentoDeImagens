@@ -268,6 +268,11 @@
             0,
             0,
             0});
+            this.numUpDown_DividImgs.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.numUpDown_DividImgs.Name = "numUpDown_DividImgs";
             this.numUpDown_DividImgs.Size = new System.Drawing.Size(47, 20);
             this.numUpDown_DividImgs.TabIndex = 13;
@@ -287,6 +292,7 @@
             this.btDividirImagens.TabIndex = 12;
             this.btDividirImagens.Text = "Divisão";
             this.btDividirImagens.UseVisualStyleBackColor = true;
+            this.btDividirImagens.Click += new System.EventHandler(this.btDividirImagens_Click);
             // 
             // btGrayScale
             // 

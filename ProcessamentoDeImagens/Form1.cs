@@ -523,6 +523,62 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btDividirImagens_Click(object sender, EventArgs e)
+        {
+            double divisor = (double)numUpDown_DividImgs.Value;
+
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para realizar a divisão.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (divisor <= 0)
+            {
+                MessageBox.Show("Informe um valor maior que zero para realizar a divisão.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ExibirImagemFinal(DividirImagem(img1, divisor));
+        }
+
+        private Bitmap DividirImagem(Bitmap img1, double divisor)
+        {
+            Bitmap resultado = new Bitmap(img1.Width, img1.Height);
+
+            for (int x = 0; x < img1.Width; x++)
+            {
+                for (int y = 0; y < img1.Height; y++)
+                {
+                    Color pixel = img1.GetPixel(x, y);
+
+                    int r = (int)(pixel.R / divisor);
+                    int g = (int)(pixel.G / divisor);
+                    int b = (int)(pixel.B / divisor);
+
+                    // Tratamento de overflow e underflow
+                    if (r > 255) r = 255;
+                    if (g > 255) g = 255;
+                    if (b > 255) b = 255;
+
+                    if (r < 0) r = 0;
+                    if (g < 0) g = 0;
+                    if (b < 0) b = 0;
+
+                    Color novoPixel = Color.FromArgb(pixel.A, r, g, b);
+                    resultado.SetPixel(x, y, novoPixel);
+                }
+            }
+
+            return resultado;
+        }
+
         
         private void btGrayScale_Click(object sender, EventArgs e)
         {
