@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ProcessamentoDeImagens
@@ -45,6 +46,112 @@ namespace ProcessamentoDeImagens
             InitializeComponent();
         }
 
+        private void ArmazenarImagem1EmMatrizes()
+        {
+            vImg1Gray = new byte[img1.Width, img1.Height];
+            vImg1R = new byte[img1.Width, img1.Height];
+            vImg1G = new byte[img1.Width, img1.Height];
+            vImg1B = new byte[img1.Width, img1.Height];
+            vImg1A = new byte[img1.Width, img1.Height];
+
+            ArmazenarPixelsEmMatrizes(img1, vImg1Gray, vImg1R, vImg1G, vImg1B, vImg1A);
+        }
+
+        private void ArmazenarImagem2EmMatrizes()
+        {
+            vImg2Gray = new byte[img2.Width, img2.Height];
+            vImg2R = new byte[img2.Width, img2.Height];
+            vImg2G = new byte[img2.Width, img2.Height];
+            vImg2B = new byte[img2.Width, img2.Height];
+            vImg2A = new byte[img2.Width, img2.Height];
+
+            ArmazenarPixelsEmMatrizes(img2, vImg2Gray, vImg2R, vImg2G, vImg2B, vImg2A);
+        }
+
+        private void ArmazenarPixelsEmMatrizes(Bitmap imagem, byte[,] matrizGray, byte[,] matrizR, byte[,] matrizG, byte[,] matrizB, byte[,] matrizA)
+        {
+            for (int x = 0; x < imagem.Width; x++)
+            {
+                for (int y = 0; y < imagem.Height; y++)
+                {
+                    Color pixel = imagem.GetPixel(x, y);
+
+                    matrizR[x, y] = pixel.R;
+                    matrizG[x, y] = pixel.G;
+                    matrizB[x, y] = pixel.B;
+                    matrizA[x, y] = pixel.A;
+                    matrizGray[x, y] = (byte)((pixel.R + pixel.G + pixel.B) / 3);
+                }
+            }
+        }
+
+        private int[] CalcularHistograma(Bitmap img)
+        {
+            int[] histograma = new int[256];
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+                    int intensidade = (pixel.R + pixel.G + pixel.B) / 3;
+
+                    histograma[intensidade]++;
+                }
+            }
+
+            return histograma;
+        }
+
+        private void MostrarHistograma(Chart chart, Bitmap img, string titulo)
+        {
+            int[] histograma = CalcularHistograma(img);
+
+            chart.Series.Clear();
+            chart.ChartAreas.Clear();
+            chart.Titles.Clear();
+            chart.Legends.Clear();
+
+            ChartArea area = new ChartArea("AreaHistograma");
+            area.AxisX.Minimum = 0;
+            area.AxisX.Maximum = 255;
+            area.AxisX.Interval = 51;
+            area.AxisY.Minimum = 0;
+            area.AxisX.MajorGrid.LineColor = Color.LightGray;
+            area.AxisY.MajorGrid.LineColor = Color.LightGray;
+            area.AxisX.LabelStyle.Font = new Font("Microsoft Sans Serif", 7F);
+            area.AxisY.LabelStyle.Font = new Font("Microsoft Sans Serif", 7F);
+            chart.ChartAreas.Add(area);
+
+            Series serie = new Series("Pixels");
+            serie.ChartType = SeriesChartType.Column;
+            serie.Color = Color.RoyalBlue;
+            serie.IsVisibleInLegend = false;
+
+            for (int i = 0; i < histograma.Length; i++)
+            {
+                serie.Points.AddXY(i, histograma[i]);
+            }
+
+            chart.Series.Add(serie);
+            chart.Titles.Add(titulo);
+            chart.Titles[0].Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold);
+        }
+
+        private void LimparHistogramaFinal()
+        {
+            chartHistFinal.Series.Clear();
+            chartHistFinal.ChartAreas.Clear();
+            chartHistFinal.Titles.Clear();
+        }
+
+        private void ExibirImagemFinal(Bitmap imagem)
+        {
+            imgFinal = imagem;
+            pictureBox3.Image = imgFinal;
+            MostrarHistograma(chartHistFinal, imgFinal, "Histograma Final");
+        }
+
         private void btCarregarImagem_Click(object sender, EventArgs e)
         {
             // Configurações iniciais da OpenFileDialogBox
@@ -79,11 +186,9 @@ namespace ProcessamentoDeImagens
                 {
                     // Adiciona imagem na PictureBox
                     pictureBox1.Image = img1;
-                    vImg1Gray = new byte[img1.Width, img1.Height];
-                    vImg1R = new byte[img1.Width, img1.Height];
-                    vImg1G = new byte[img1.Width, img1.Height];
-                    vImg1B = new byte[img1.Width, img1.Height];
-                    vImg1A = new byte[img1.Width, img1.Height];
+                    ArmazenarImagem1EmMatrizes();
+                    MostrarHistograma(chartHistOriginal, img1, "Histograma Original");
+                    LimparHistogramaFinal();
                 }
 
             }
@@ -123,11 +228,7 @@ namespace ProcessamentoDeImagens
                 {
                     // Adiciona imagem na PictureBox
                     pictureBox2.Image = img2;
-                    vImg2Gray = new byte[img2.Width, img2.Height];
-                    vImg2R = new byte[img2.Width, img2.Height];
-                    vImg2G = new byte[img2.Width, img2.Height];
-                    vImg2B = new byte[img2.Width, img2.Height];
-                    vImg2A = new byte[img2.Width, img2.Height];
+                    ArmazenarImagem2EmMatrizes();
 
                 }
 
@@ -167,8 +268,7 @@ namespace ProcessamentoDeImagens
                     return;
                 }
 
-                imgFinal = AumentarBrilho(img1, valor);
-                pictureBox3.Image = imgFinal;
+                ExibirImagemFinal(AumentarBrilho(img1, valor));
                 return;
             }
 
@@ -192,8 +292,7 @@ namespace ProcessamentoDeImagens
                     return;
                 }
 
-                imgFinal = SomarDuasImagens(img1, img2);
-                pictureBox3.Image = imgFinal;
+                ExibirImagemFinal(SomarDuasImagens(img1, img2));
                 return;
             }
 
@@ -298,8 +397,7 @@ namespace ProcessamentoDeImagens
                     return;
                 }
 
-                imgFinal = SubtrairDuasImagens(img1, img2);
-                pictureBox3.Image = imgFinal;
+                ExibirImagemFinal(SubtrairDuasImagens(img1, img2));
                 return;
             }
 
@@ -312,8 +410,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = DiminuirBrilho(img1, valor);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(DiminuirBrilho(img1, valor));
         }
 
         private Bitmap SubtrairDuasImagens(Bitmap img1, Bitmap img2)
@@ -392,8 +489,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = MultiplicarImagem(img1, fator);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(MultiplicarImagem(img1, fator));
         }
 
         private Bitmap MultiplicarImagem(Bitmap img1, double fator)
@@ -438,8 +534,7 @@ namespace ProcessamentoDeImagens
                                 MessageBoxIcon.Warning);
                 return;
             }
-            imgFinal = GrayScale(img1);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(GrayScale(img1));
         }
 
         private Bitmap GrayScale(Bitmap img1)
@@ -479,8 +574,7 @@ namespace ProcessamentoDeImagens
                                 MessageBoxIcon.Warning);
                 return;
             }
-            imgFinal = InverterHorizontal(img1);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(InverterHorizontal(img1));
         }
 
         private Bitmap InverterHorizontal(Bitmap img)
@@ -514,8 +608,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = InverterVertical(img1);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(InverterVertical(img1));
         }
 
         private Bitmap InverterVertical(Bitmap img)
@@ -558,8 +651,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = Diferenca(img1, img2);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(Diferenca(img1, img2));
         }
 
         private Bitmap Diferenca(Bitmap img1, Bitmap img2)
@@ -609,8 +701,7 @@ namespace ProcessamentoDeImagens
 
             double alpha = (double)numUpDown_Blending.Value; // ex: 0.0 até 1.0
 
-            imgFinal = Blending(img1, img2, alpha);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(Blending(img1, img2, alpha));
         }
 
         private Bitmap Blending(Bitmap img1, Bitmap img2, double alpha)
@@ -663,8 +754,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = Media(img1, img2);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(Media(img1, img2));
         }
 
         private Bitmap Media(Bitmap img1, Bitmap img2)
@@ -698,8 +788,7 @@ namespace ProcessamentoDeImagens
             if (!ValidarDuasImagens("AND"))
                 return;
 
-            imgFinal = AND(img1, img2);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(AND(img1, img2));
         }
 
         private Bitmap AND(Bitmap img1, Bitmap img2)
@@ -727,8 +816,7 @@ namespace ProcessamentoDeImagens
             if (!ValidarDuasImagens("OR"))
                 return;
 
-            imgFinal = OR(img1, img2);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(OR(img1, img2));
         }
 
         private Bitmap OR(Bitmap img1, Bitmap img2)
@@ -762,8 +850,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = NOT(img1);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(NOT(img1));
         }
 
         private Bitmap NOT(Bitmap img)
@@ -790,8 +877,7 @@ namespace ProcessamentoDeImagens
             if (!ValidarDuasImagens("XOR"))
                 return;
 
-            imgFinal = XOR(img1, img2);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(XOR(img1, img2));
         }
 
         private Bitmap XOR(Bitmap img1, Bitmap img2)
@@ -860,8 +946,7 @@ namespace ProcessamentoDeImagens
 
             int limiar = (int)numUpDown_Limiarizacao.Value;
 
-            imgFinal = Limiarizacao(img1, limiar);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(Limiarizacao(img1, limiar));
         }
 
         private Bitmap Limiarizacao(Bitmap img, int limiar)
@@ -902,8 +987,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = Negativo(img1);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(Negativo(img1));
         }
 
         private Bitmap Negativo(Bitmap img)
@@ -929,6 +1013,72 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btEqualizacaoHistograma_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para aplicar a equalização de histograma.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ExibirImagemFinal(EqualizarHistograma(img1));
+        }
+
+        private Bitmap EqualizarHistograma(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+            int[] histograma = CalcularHistograma(img);
+            int[] acumulado = new int[256];
+
+            acumulado[0] = histograma[0];
+
+            for (int i = 1; i < histograma.Length; i++)
+            {
+                acumulado[i] = acumulado[i - 1] + histograma[i];
+            }
+
+            int totalPixels = img.Width * img.Height;
+            int acumuladoMinimo = 0;
+
+            for (int i = 0; i < acumulado.Length; i++)
+            {
+                if (acumulado[i] > 0)
+                {
+                    acumuladoMinimo = acumulado[i];
+                    break;
+                }
+            }
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+                    int intensidade = (pixel.R + pixel.G + pixel.B) / 3;
+                    int novoValor;
+
+                    if (totalPixels == acumuladoMinimo)
+                    {
+                        novoValor = intensidade;
+                    }
+                    else
+                    {
+                        novoValor = (int)Math.Round(((double)(acumulado[intensidade] - acumuladoMinimo) / (totalPixels - acumuladoMinimo)) * 255);
+                    }
+
+                    if (novoValor < 0) novoValor = 0;
+                    if (novoValor > 255) novoValor = 255;
+
+                    resultado.SetPixel(x, y, Color.FromArgb(pixel.A, novoValor, novoValor, novoValor));
+                }
+            }
+
+            return resultado;
+        }
+
         private void btMediana_Click(object sender, EventArgs e)
         {
             if (img1 == null)
@@ -940,8 +1090,7 @@ namespace ProcessamentoDeImagens
                 return;
             }
 
-            imgFinal = FiltroMediana(img1);
-            pictureBox3.Image = imgFinal;
+            ExibirImagemFinal(FiltroMediana(img1));
         }
 
         private Bitmap FiltroMediana(Bitmap img)

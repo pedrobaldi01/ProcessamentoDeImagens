@@ -61,6 +61,10 @@
             this.btNOT = new System.Windows.Forms.Button();
             this.btXOR = new System.Windows.Forms.Button();
             this.boxOpLog = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.chartHistOriginal = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chartHistFinal = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btEqualizacaoHistograma = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -71,6 +75,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Limiarizacao)).BeginInit();
             this.boxOpLog.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistOriginal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistFinal)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -87,7 +94,7 @@
             // pictureBox3
             // 
             this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Location = new System.Drawing.Point(610, 48);
+            this.pictureBox3.Location = new System.Drawing.Point(800, 48);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(160, 160);
@@ -123,7 +130,7 @@
             // 
             // btSalvarImagem
             // 
-            this.btSalvarImagem.Location = new System.Drawing.Point(644, 223);
+            this.btSalvarImagem.Location = new System.Drawing.Point(834, 223);
             this.btSalvarImagem.Margin = new System.Windows.Forms.Padding(2);
             this.btSalvarImagem.Name = "btSalvarImagem";
             this.btSalvarImagem.Size = new System.Drawing.Size(93, 29);
@@ -153,29 +160,32 @@
             // 
             // btSomarImagens
             // 
-            this.btSomarImagens.Location = new System.Drawing.Point(50, 306);
+            this.btSomarImagens.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSomarImagens.Location = new System.Drawing.Point(5, 16);
             this.btSomarImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btSomarImagens.Name = "btSomarImagens";
-            this.btSomarImagens.Size = new System.Drawing.Size(110, 29);
+            this.btSomarImagens.Size = new System.Drawing.Size(80, 30);
             this.btSomarImagens.TabIndex = 6;
-            this.btSomarImagens.Text = "Somar imagens";
+            this.btSomarImagens.Text = "Adição";
             this.btSomarImagens.UseVisualStyleBackColor = true;
             this.btSomarImagens.Click += new System.EventHandler(this.btSomarImagens_Click);
             // 
             // btSubtrairImagens
             // 
-            this.btSubtrairImagens.Location = new System.Drawing.Point(50, 356);
+            this.btSubtrairImagens.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSubtrairImagens.Location = new System.Drawing.Point(5, 50);
             this.btSubtrairImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btSubtrairImagens.Name = "btSubtrairImagens";
-            this.btSubtrairImagens.Size = new System.Drawing.Size(110, 29);
+            this.btSubtrairImagens.Size = new System.Drawing.Size(80, 30);
             this.btSubtrairImagens.TabIndex = 7;
-            this.btSubtrairImagens.Text = "Subtrair imagens";
+            this.btSubtrairImagens.Text = "Subtração";
             this.btSubtrairImagens.UseVisualStyleBackColor = true;
             this.btSubtrairImagens.Click += new System.EventHandler(this.btSubtrairImagens_Click);
             // 
             // numUpDown_SomaImgs
             // 
-            this.numUpDown_SomaImgs.Location = new System.Drawing.Point(167, 313);
+            this.numUpDown_SomaImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDown_SomaImgs.Location = new System.Drawing.Point(89, 24);
             this.numUpDown_SomaImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_SomaImgs.Maximum = new decimal(new int[] {
             255,
@@ -188,7 +198,8 @@
             // 
             // numUpDown_SubtImgs
             // 
-            this.numUpDown_SubtImgs.Location = new System.Drawing.Point(167, 363);
+            this.numUpDown_SubtImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDown_SubtImgs.Location = new System.Drawing.Point(89, 57);
             this.numUpDown_SubtImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_SubtImgs.Maximum = new decimal(new int[] {
             255,
@@ -202,12 +213,13 @@
             // numUpDown_MultImgs
             // 
             this.numUpDown_MultImgs.DecimalPlaces = 2;
+            this.numUpDown_MultImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUpDown_MultImgs.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numUpDown_MultImgs.Location = new System.Drawing.Point(362, 313);
+            this.numUpDown_MultImgs.Location = new System.Drawing.Point(89, 91);
             this.numUpDown_MultImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_MultImgs.Maximum = new decimal(new int[] {
             5,
@@ -230,24 +242,26 @@
             // 
             // btMultiplicarImagens
             // 
-            this.btMultiplicarImagens.Location = new System.Drawing.Point(244, 306);
+            this.btMultiplicarImagens.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMultiplicarImagens.Location = new System.Drawing.Point(5, 84);
             this.btMultiplicarImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btMultiplicarImagens.Name = "btMultiplicarImagens";
-            this.btMultiplicarImagens.Size = new System.Drawing.Size(110, 29);
+            this.btMultiplicarImagens.Size = new System.Drawing.Size(80, 30);
             this.btMultiplicarImagens.TabIndex = 10;
-            this.btMultiplicarImagens.Text = "Multiplicar imagens";
+            this.btMultiplicarImagens.Text = "Multiplicação";
             this.btMultiplicarImagens.UseVisualStyleBackColor = true;
             this.btMultiplicarImagens.Click += new System.EventHandler(this.btMultiplicarImagens_Click);
             // 
             // numUpDown_DividImgs
             // 
             this.numUpDown_DividImgs.DecimalPlaces = 2;
+            this.numUpDown_DividImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUpDown_DividImgs.Increment = new decimal(new int[] {
             10,
             0,
             0,
             131072});
-            this.numUpDown_DividImgs.Location = new System.Drawing.Point(362, 363);
+            this.numUpDown_DividImgs.Location = new System.Drawing.Point(89, 124);
             this.numUpDown_DividImgs.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_DividImgs.Maximum = new decimal(new int[] {
             5,
@@ -265,17 +279,18 @@
             // 
             // btDividirImagens
             // 
-            this.btDividirImagens.Location = new System.Drawing.Point(244, 356);
+            this.btDividirImagens.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDividirImagens.Location = new System.Drawing.Point(5, 118);
             this.btDividirImagens.Margin = new System.Windows.Forms.Padding(2);
             this.btDividirImagens.Name = "btDividirImagens";
-            this.btDividirImagens.Size = new System.Drawing.Size(110, 29);
+            this.btDividirImagens.Size = new System.Drawing.Size(80, 30);
             this.btDividirImagens.TabIndex = 12;
-            this.btDividirImagens.Text = "Dividir imagens";
+            this.btDividirImagens.Text = "Divisão";
             this.btDividirImagens.UseVisualStyleBackColor = true;
             // 
             // btGrayScale
             // 
-            this.btGrayScale.Location = new System.Drawing.Point(50, 410);
+            this.btGrayScale.Location = new System.Drawing.Point(256, 421);
             this.btGrayScale.Margin = new System.Windows.Forms.Padding(2);
             this.btGrayScale.Name = "btGrayScale";
             this.btGrayScale.Size = new System.Drawing.Size(110, 29);
@@ -286,7 +301,7 @@
             // 
             // btInvertHorz
             // 
-            this.btInvertHorz.Location = new System.Drawing.Point(175, 410);
+            this.btInvertHorz.Location = new System.Drawing.Point(381, 421);
             this.btInvertHorz.Margin = new System.Windows.Forms.Padding(2);
             this.btInvertHorz.Name = "btInvertHorz";
             this.btInvertHorz.Size = new System.Drawing.Size(110, 29);
@@ -297,7 +312,7 @@
             // 
             // btInvertVert
             // 
-            this.btInvertVert.Location = new System.Drawing.Point(300, 410);
+            this.btInvertVert.Location = new System.Drawing.Point(506, 421);
             this.btInvertVert.Margin = new System.Windows.Forms.Padding(2);
             this.btInvertVert.Name = "btInvertVert";
             this.btInvertVert.Size = new System.Drawing.Size(110, 29);
@@ -309,7 +324,7 @@
             // btDiferencaImgs
             // 
             this.btDiferencaImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btDiferencaImgs.Location = new System.Drawing.Point(425, 405);
+            this.btDiferencaImgs.Location = new System.Drawing.Point(631, 416);
             this.btDiferencaImgs.Margin = new System.Windows.Forms.Padding(2);
             this.btDiferencaImgs.Name = "btDiferencaImgs";
             this.btDiferencaImgs.Size = new System.Drawing.Size(110, 38);
@@ -320,10 +335,11 @@
             // 
             // btBlending
             // 
-            this.btBlending.Location = new System.Drawing.Point(425, 356);
+            this.btBlending.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btBlending.Location = new System.Drawing.Point(5, 186);
             this.btBlending.Margin = new System.Windows.Forms.Padding(2);
             this.btBlending.Name = "btBlending";
-            this.btBlending.Size = new System.Drawing.Size(110, 29);
+            this.btBlending.Size = new System.Drawing.Size(80, 30);
             this.btBlending.TabIndex = 18;
             this.btBlending.Text = "Blending";
             this.btBlending.UseVisualStyleBackColor = true;
@@ -332,12 +348,13 @@
             // numUpDown_Blending
             // 
             this.numUpDown_Blending.DecimalPlaces = 2;
+            this.numUpDown_Blending.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numUpDown_Blending.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numUpDown_Blending.Location = new System.Drawing.Point(542, 362);
+            this.numUpDown_Blending.Location = new System.Drawing.Point(89, 193);
             this.numUpDown_Blending.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_Blending.Maximum = new decimal(new int[] {
             1,
@@ -355,10 +372,11 @@
             // 
             // btMediaImgs
             // 
-            this.btMediaImgs.Location = new System.Drawing.Point(50, 462);
+            this.btMediaImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMediaImgs.Location = new System.Drawing.Point(5, 152);
             this.btMediaImgs.Margin = new System.Windows.Forms.Padding(2);
             this.btMediaImgs.Name = "btMediaImgs";
-            this.btMediaImgs.Size = new System.Drawing.Size(110, 29);
+            this.btMediaImgs.Size = new System.Drawing.Size(80, 30);
             this.btMediaImgs.TabIndex = 20;
             this.btMediaImgs.Text = "Média";
             this.btMediaImgs.UseVisualStyleBackColor = true;
@@ -390,7 +408,7 @@
             // 
             // btNegativoImgs
             // 
-            this.btNegativoImgs.Location = new System.Drawing.Point(175, 462);
+            this.btNegativoImgs.Location = new System.Drawing.Point(381, 473);
             this.btNegativoImgs.Margin = new System.Windows.Forms.Padding(2);
             this.btNegativoImgs.Name = "btNegativoImgs";
             this.btNegativoImgs.Size = new System.Drawing.Size(110, 29);
@@ -401,7 +419,7 @@
             // 
             // btMediana
             // 
-            this.btMediana.Location = new System.Drawing.Point(300, 462);
+            this.btMediana.Location = new System.Drawing.Point(506, 473);
             this.btMediana.Margin = new System.Windows.Forms.Padding(2);
             this.btMediana.Name = "btMediana";
             this.btMediana.Size = new System.Drawing.Size(110, 29);
@@ -409,10 +427,11 @@
             this.btMediana.Text = "Mediana";
             this.btMediana.UseVisualStyleBackColor = true;
             this.btMediana.Click += new System.EventHandler(this.btMediana_Click);
-            //
+            // 
             // btAND
-            //
-            this.btAND.Location = new System.Drawing.Point(19, 18);
+            // 
+            this.btAND.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btAND.Location = new System.Drawing.Point(5, 19);
             this.btAND.Margin = new System.Windows.Forms.Padding(2);
             this.btAND.Name = "btAND";
             this.btAND.Size = new System.Drawing.Size(50, 29);
@@ -420,10 +439,11 @@
             this.btAND.Text = "AND";
             this.btAND.UseVisualStyleBackColor = true;
             this.btAND.Click += new System.EventHandler(this.btAND_Click);
-            //
+            // 
             // btOR
-            //
-            this.btOR.Location = new System.Drawing.Point(92, 18);
+            // 
+            this.btOR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btOR.Location = new System.Drawing.Point(68, 19);
             this.btOR.Margin = new System.Windows.Forms.Padding(2);
             this.btOR.Name = "btOR";
             this.btOR.Size = new System.Drawing.Size(50, 29);
@@ -431,10 +451,11 @@
             this.btOR.Text = "OR";
             this.btOR.UseVisualStyleBackColor = true;
             this.btOR.Click += new System.EventHandler(this.btOR_Click);
-            //
+            // 
             // btNOT
-            //
-            this.btNOT.Location = new System.Drawing.Point(19, 67);
+            // 
+            this.btNOT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btNOT.Location = new System.Drawing.Point(5, 58);
             this.btNOT.Margin = new System.Windows.Forms.Padding(2);
             this.btNOT.Name = "btNOT";
             this.btNOT.Size = new System.Drawing.Size(50, 29);
@@ -442,10 +463,11 @@
             this.btNOT.Text = "NOT";
             this.btNOT.UseVisualStyleBackColor = true;
             this.btNOT.Click += new System.EventHandler(this.btNOT_Click);
-            //
+            // 
             // btXOR
-            //
-            this.btXOR.Location = new System.Drawing.Point(92, 67);
+            // 
+            this.btXOR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btXOR.Location = new System.Drawing.Point(68, 58);
             this.btXOR.Margin = new System.Windows.Forms.Padding(2);
             this.btXOR.Name = "btXOR";
             this.btXOR.Size = new System.Drawing.Size(50, 29);
@@ -453,45 +475,91 @@
             this.btXOR.Text = "XOR";
             this.btXOR.UseVisualStyleBackColor = true;
             this.btXOR.Click += new System.EventHandler(this.btXOR_Click);
-            //
+            // 
             // boxOpLog
-            //
+            // 
             this.boxOpLog.Controls.Add(this.btAND);
+            this.boxOpLog.Controls.Add(this.btOR);
             this.boxOpLog.Controls.Add(this.btNOT);
             this.boxOpLog.Controls.Add(this.btXOR);
-            this.boxOpLog.Controls.Add(this.btOR);
-            this.boxOpLog.Location = new System.Drawing.Point(616, 290);
+            this.boxOpLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.boxOpLog.Location = new System.Drawing.Point(607, 48);
             this.boxOpLog.Name = "boxOpLog";
-            this.boxOpLog.Size = new System.Drawing.Size(158, 108);
+            this.boxOpLog.Size = new System.Drawing.Size(125, 94);
             this.boxOpLog.TabIndex = 29;
             this.boxOpLog.TabStop = false;
             this.boxOpLog.Text = "Operações lógicas";
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btSomarImagens);
+            this.groupBox1.Controls.Add(this.numUpDown_SomaImgs);
+            this.groupBox1.Controls.Add(this.btSubtrairImagens);
+            this.groupBox1.Controls.Add(this.numUpDown_SubtImgs);
+            this.groupBox1.Controls.Add(this.btMultiplicarImagens);
+            this.groupBox1.Controls.Add(this.numUpDown_MultImgs);
+            this.groupBox1.Controls.Add(this.numUpDown_Blending);
+            this.groupBox1.Controls.Add(this.btMediaImgs);
+            this.groupBox1.Controls.Add(this.btBlending);
+            this.groupBox1.Controls.Add(this.btDividirImagens);
+            this.groupBox1.Controls.Add(this.numUpDown_DividImgs);
+            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Location = new System.Drawing.Point(443, 48);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(146, 220);
+            this.groupBox1.TabIndex = 30;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Operações Aritméticas";
+            // 
+            // chartHistOriginal
+            // 
+            this.chartHistOriginal.BorderlineColor = System.Drawing.Color.LightGray;
+            this.chartHistOriginal.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.chartHistOriginal.Location = new System.Drawing.Point(22, 277);
+            this.chartHistOriginal.Name = "chartHistOriginal";
+            this.chartHistOriginal.Size = new System.Drawing.Size(210, 130);
+            this.chartHistOriginal.TabIndex = 31;
+            this.chartHistOriginal.Text = "Histograma Original";
+            // 
+            // chartHistFinal
+            // 
+            this.chartHistFinal.BorderlineColor = System.Drawing.Color.LightGray;
+            this.chartHistFinal.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            this.chartHistFinal.Location = new System.Drawing.Point(775, 276);
+            this.chartHistFinal.Name = "chartHistFinal";
+            this.chartHistFinal.Size = new System.Drawing.Size(210, 130);
+            this.chartHistFinal.TabIndex = 32;
+            this.chartHistFinal.Text = "Histograma Equalizado";
+            // 
+            // btEqualizacaoHistograma
+            // 
+            this.btEqualizacaoHistograma.Location = new System.Drawing.Point(631, 473);
+            this.btEqualizacaoHistograma.Margin = new System.Windows.Forms.Padding(2);
+            this.btEqualizacaoHistograma.Name = "btEqualizacaoHistograma";
+            this.btEqualizacaoHistograma.Size = new System.Drawing.Size(110, 29);
+            this.btEqualizacaoHistograma.TabIndex = 35;
+            this.btEqualizacaoHistograma.Text = "Equalização";
+            this.btEqualizacaoHistograma.UseVisualStyleBackColor = true;
+            this.btEqualizacaoHistograma.Click += new System.EventHandler(this.btEqualizacaoHistograma_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(864, 658);
+            this.ClientSize = new System.Drawing.Size(987, 658);
+            this.Controls.Add(this.btEqualizacaoHistograma);
+            this.Controls.Add(this.chartHistFinal);
+            this.Controls.Add(this.chartHistOriginal);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.boxOpLog);
             this.Controls.Add(this.btMediana);
             this.Controls.Add(this.btNegativoImgs);
             this.Controls.Add(this.numUpDown_Limiarizacao);
             this.Controls.Add(this.btLimiarizacao);
-            this.Controls.Add(this.btMediaImgs);
-            this.Controls.Add(this.numUpDown_Blending);
-            this.Controls.Add(this.btBlending);
             this.Controls.Add(this.btDiferencaImgs);
             this.Controls.Add(this.btInvertVert);
             this.Controls.Add(this.btInvertHorz);
             this.Controls.Add(this.btGrayScale);
-            this.Controls.Add(this.numUpDown_DividImgs);
-            this.Controls.Add(this.btDividirImagens);
-            this.Controls.Add(this.numUpDown_MultImgs);
-            this.Controls.Add(this.btMultiplicarImagens);
-            this.Controls.Add(this.numUpDown_SubtImgs);
-            this.Controls.Add(this.numUpDown_SomaImgs);
-            this.Controls.Add(this.btSubtrairImagens);
-            this.Controls.Add(this.btSomarImagens);
             this.Controls.Add(this.btMostrarImagem);
             this.Controls.Add(this.btCarregarImagem2);
             this.Controls.Add(this.btSalvarImagem);
@@ -499,6 +567,7 @@
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.pictureBox1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -512,6 +581,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Blending)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Limiarizacao)).EndInit();
             this.boxOpLog.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistOriginal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chartHistFinal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -551,6 +623,10 @@
         private System.Windows.Forms.Button btNOT;
         private System.Windows.Forms.Button btXOR;
         private System.Windows.Forms.GroupBox boxOpLog;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartHistOriginal;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chartHistFinal;
+        private System.Windows.Forms.Button btEqualizacaoHistograma;
     }
 }
 
