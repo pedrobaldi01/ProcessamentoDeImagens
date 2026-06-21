@@ -67,9 +67,16 @@
             this.btEqualizacaoHistograma = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btMin = new System.Windows.Forms.Button();
             this.btMean = new System.Windows.Forms.Button();
             this.btMax = new System.Windows.Forms.Button();
+            this.btMin = new System.Windows.Forms.Button();
+            this.btOrdem = new System.Windows.Forms.Button();
+            this.numUpDown_Ordem = new System.Windows.Forms.NumericUpDown();
+            this.btSuavConserv = new System.Windows.Forms.Button();
+            this.btGaussiano = new System.Windows.Forms.Button();
+            this.numUpDown_Sigma = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -85,6 +92,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartHistFinal)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Ordem)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Sigma)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             //
             // pictureBox1
@@ -317,7 +327,7 @@
             this.btInvertHorz.Location = new System.Drawing.Point(8, 57);
             this.btInvertHorz.Margin = new System.Windows.Forms.Padding(2);
             this.btInvertHorz.Name = "btInvertHorz";
-            this.btInvertHorz.Size = new System.Drawing.Size(110, 29);
+            this.btInvertHorz.Size = new System.Drawing.Size(110, 30);
             this.btInvertHorz.TabIndex = 15;
             this.btInvertHorz.Text = "Horizontal";
             this.btInvertHorz.UseVisualStyleBackColor = true;
@@ -328,7 +338,7 @@
             this.btInvertVert.Location = new System.Drawing.Point(8, 20);
             this.btInvertVert.Margin = new System.Windows.Forms.Padding(2);
             this.btInvertVert.Name = "btInvertVert";
-            this.btInvertVert.Size = new System.Drawing.Size(110, 29);
+            this.btInvertVert.Size = new System.Drawing.Size(110, 30);
             this.btInvertVert.TabIndex = 16;
             this.btInvertVert.Text = "Vertical";
             this.btInvertVert.UseVisualStyleBackColor = true;
@@ -337,7 +347,7 @@
             // btDiferencaImgs
             //
             this.btDiferencaImgs.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btDiferencaImgs.Location = new System.Drawing.Point(631, 416);
+            this.btDiferencaImgs.Location = new System.Drawing.Point(70, 431);
             this.btDiferencaImgs.Margin = new System.Windows.Forms.Padding(2);
             this.btDiferencaImgs.Name = "btDiferencaImgs";
             this.btDiferencaImgs.Size = new System.Drawing.Size(110, 38);
@@ -397,7 +407,7 @@
             //
             // numUpDown_Limiarizacao
             //
-            this.numUpDown_Limiarizacao.Location = new System.Drawing.Point(542, 313);
+            this.numUpDown_Limiarizacao.Location = new System.Drawing.Point(133, 503);
             this.numUpDown_Limiarizacao.Margin = new System.Windows.Forms.Padding(2);
             this.numUpDown_Limiarizacao.Maximum = new decimal(new int[] {
             255,
@@ -410,7 +420,7 @@
             //
             // btLimiarizacao
             //
-            this.btLimiarizacao.Location = new System.Drawing.Point(425, 307);
+            this.btLimiarizacao.Location = new System.Drawing.Point(16, 497);
             this.btLimiarizacao.Margin = new System.Windows.Forms.Padding(2);
             this.btLimiarizacao.Name = "btLimiarizacao";
             this.btLimiarizacao.Size = new System.Drawing.Size(110, 29);
@@ -432,10 +442,10 @@
             //
             // btMediana
             //
-            this.btMediana.Location = new System.Drawing.Point(506, 473);
+            this.btMediana.Location = new System.Drawing.Point(72, 18);
             this.btMediana.Margin = new System.Windows.Forms.Padding(2);
             this.btMediana.Name = "btMediana";
-            this.btMediana.Size = new System.Drawing.Size(110, 29);
+            this.btMediana.Size = new System.Drawing.Size(80, 30);
             this.btMediana.TabIndex = 24;
             this.btMediana.Text = "Mediana";
             this.btMediana.UseVisualStyleBackColor = true;
@@ -546,7 +556,7 @@
             //
             // btEqualizacaoHistograma
             //
-            this.btEqualizacaoHistograma.Location = new System.Drawing.Point(418, 378);
+            this.btEqualizacaoHistograma.Location = new System.Drawing.Point(355, 506);
             this.btEqualizacaoHistograma.Margin = new System.Windows.Forms.Padding(2);
             this.btEqualizacaoHistograma.Name = "btEqualizacaoHistograma";
             this.btEqualizacaoHistograma.Size = new System.Drawing.Size(244, 29);
@@ -568,32 +578,24 @@
             //
             // groupBox3
             //
+            this.groupBox3.Controls.Add(this.btSuavConserv);
             this.groupBox3.Controls.Add(this.btMean);
+            this.groupBox3.Controls.Add(this.numUpDown_Ordem);
             this.groupBox3.Controls.Add(this.btMax);
+            this.groupBox3.Controls.Add(this.btOrdem);
             this.groupBox3.Controls.Add(this.btMin);
+            this.groupBox3.Controls.Add(this.btMediana);
             this.groupBox3.Location = new System.Drawing.Point(244, 277);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(84, 129);
+            this.groupBox3.Size = new System.Drawing.Size(194, 129);
             this.groupBox3.TabIndex = 37;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Filtros 3x3";
-            //
-            // btMin
-            //
-            this.btMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMin.Location = new System.Drawing.Point(18, 18);
-            this.btMin.Margin = new System.Windows.Forms.Padding(2);
-            this.btMin.Name = "btMin";
-            this.btMin.Size = new System.Drawing.Size(50, 29);
-            this.btMin.TabIndex = 38;
-            this.btMin.Text = "MIN";
-            this.btMin.UseVisualStyleBackColor = true;
-            this.btMin.Click += new System.EventHandler(this.btMin_Click);
+            this.groupBox3.Text = "Realce de Imagens";
             //
             // btMean
             //
             this.btMean.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMean.Location = new System.Drawing.Point(18, 87);
+            this.btMean.Location = new System.Drawing.Point(10, 87);
             this.btMean.Margin = new System.Windows.Forms.Padding(2);
             this.btMean.Name = "btMean";
             this.btMean.Size = new System.Drawing.Size(50, 29);
@@ -605,7 +607,7 @@
             // btMax
             //
             this.btMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMax.Location = new System.Drawing.Point(18, 53);
+            this.btMax.Location = new System.Drawing.Point(10, 53);
             this.btMax.Margin = new System.Windows.Forms.Padding(2);
             this.btMax.Name = "btMax";
             this.btMax.Size = new System.Drawing.Size(50, 29);
@@ -614,11 +616,138 @@
             this.btMax.UseVisualStyleBackColor = true;
             this.btMax.Click += new System.EventHandler(this.btMax_Click);
             //
+            // btMin
+            //
+            this.btMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMin.Location = new System.Drawing.Point(10, 18);
+            this.btMin.Margin = new System.Windows.Forms.Padding(2);
+            this.btMin.Name = "btMin";
+            this.btMin.Size = new System.Drawing.Size(50, 29);
+            this.btMin.TabIndex = 38;
+            this.btMin.Text = "MIN";
+            this.btMin.UseVisualStyleBackColor = true;
+            this.btMin.Click += new System.EventHandler(this.btMin_Click);
+            //
+            // btOrdem
+            //
+            this.btOrdem.Location = new System.Drawing.Point(72, 87);
+            this.btOrdem.Margin = new System.Windows.Forms.Padding(2);
+            this.btOrdem.Name = "btOrdem";
+            this.btOrdem.Size = new System.Drawing.Size(50, 30);
+            this.btOrdem.TabIndex = 38;
+            this.btOrdem.Text = "Ordem";
+            this.btOrdem.UseVisualStyleBackColor = true;
+            this.btOrdem.Click += new System.EventHandler(this.btOrdem_Click);
+            //
+            // numUpDown_Ordem
+            //
+            this.numUpDown_Ordem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDown_Ordem.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numUpDown_Ordem.Location = new System.Drawing.Point(131, 93);
+            this.numUpDown_Ordem.Margin = new System.Windows.Forms.Padding(2);
+            this.numUpDown_Ordem.Maximum = new decimal(new int[] {
+            9,
+            0,
+            0,
+            0});
+            this.numUpDown_Ordem.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numUpDown_Ordem.Name = "numUpDown_Ordem";
+            this.numUpDown_Ordem.Size = new System.Drawing.Size(47, 20);
+            this.numUpDown_Ordem.TabIndex = 41;
+            this.numUpDown_Ordem.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            //
+            // btSuavConserv
+            //
+            this.btSuavConserv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSuavConserv.Location = new System.Drawing.Point(72, 53);
+            this.btSuavConserv.Margin = new System.Windows.Forms.Padding(2);
+            this.btSuavConserv.Name = "btSuavConserv";
+            this.btSuavConserv.Size = new System.Drawing.Size(110, 30);
+            this.btSuavConserv.TabIndex = 42;
+            this.btSuavConserv.Text = "Suav. Conservativa";
+            this.btSuavConserv.UseVisualStyleBackColor = true;
+            this.btSuavConserv.Click += new System.EventHandler(this.btSuavConserv_Click);
+            //
+            // btGaussiano
+            //
+            this.btGaussiano.Location = new System.Drawing.Point(8, 61);
+            this.btGaussiano.Margin = new System.Windows.Forms.Padding(2);
+            this.btGaussiano.Name = "btGaussiano";
+            this.btGaussiano.Size = new System.Drawing.Size(110, 29);
+            this.btGaussiano.TabIndex = 38;
+            this.btGaussiano.Text = "Gaussiano";
+            this.btGaussiano.UseVisualStyleBackColor = true;
+            this.btGaussiano.Click += new System.EventHandler(this.btGaussiano_Click);
+            //
+            // numUpDown_Sigma
+            //
+            this.numUpDown_Sigma.DecimalPlaces = 2;
+            this.numUpDown_Sigma.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numUpDown_Sigma.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numUpDown_Sigma.Location = new System.Drawing.Point(40, 37);
+            this.numUpDown_Sigma.Margin = new System.Windows.Forms.Padding(2);
+            this.numUpDown_Sigma.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numUpDown_Sigma.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.numUpDown_Sigma.Name = "numUpDown_Sigma";
+            this.numUpDown_Sigma.Size = new System.Drawing.Size(47, 20);
+            this.numUpDown_Sigma.TabIndex = 21;
+            this.numUpDown_Sigma.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            //
+            // label1
+            //
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 18);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(115, 13);
+            this.label1.TabIndex = 39;
+            this.label1.Text = "Desvio Padrão (Sigma)";
+            //
+            // groupBox4
+            //
+            this.groupBox4.Controls.Add(this.label1);
+            this.groupBox4.Controls.Add(this.btGaussiano);
+            this.groupBox4.Controls.Add(this.numUpDown_Sigma);
+            this.groupBox4.Location = new System.Drawing.Point(448, 277);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(131, 100);
+            this.groupBox4.TabIndex = 40;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Filtragem Gaussiana";
+            //
             // Form1
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 658);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btEqualizacaoHistograma);
@@ -626,7 +755,6 @@
             this.Controls.Add(this.chartHistOriginal);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.boxOpLog);
-            this.Controls.Add(this.btMediana);
             this.Controls.Add(this.btNegativoImgs);
             this.Controls.Add(this.numUpDown_Limiarizacao);
             this.Controls.Add(this.btLimiarizacao);
@@ -658,6 +786,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartHistFinal)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Ordem)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numUpDown_Sigma)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -706,6 +838,13 @@
         private System.Windows.Forms.Button btMin;
         private System.Windows.Forms.Button btMean;
         private System.Windows.Forms.Button btMax;
+        private System.Windows.Forms.Button btOrdem;
+        private System.Windows.Forms.NumericUpDown numUpDown_Ordem;
+        private System.Windows.Forms.Button btSuavConserv;
+        private System.Windows.Forms.Button btGaussiano;
+        private System.Windows.Forms.NumericUpDown numUpDown_Sigma;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 

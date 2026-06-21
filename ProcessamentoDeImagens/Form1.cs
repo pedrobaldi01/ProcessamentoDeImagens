@@ -1307,6 +1307,250 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btOrdem_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para aplicar o filtro de ordem.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            int ordem = (int)numUpDown_Ordem.Value;
+
+            if (ordem % 2 == 0)
+            {
+                MessageBox.Show("Escolha uma ordem válida: 1, 3, 5, 7 ou 9.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ExibirImagemFinal(FiltroOrdem(img1, 3, ordem));
+        }
+
+        private Bitmap FiltroOrdem(Bitmap img, int tamanhoJanela, int ordem)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+            int quantidadePixels = tamanhoJanela * tamanhoJanela;
+            int raio = tamanhoJanela / 2;
+            int indiceOrdem = ordem - 1;
+            byte[] valoresR = new byte[quantidadePixels];
+            byte[] valoresG = new byte[quantidadePixels];
+            byte[] valoresB = new byte[quantidadePixels];
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    int indice = 0;
+
+                    for (int deslocamentoX = -raio; deslocamentoX <= raio; deslocamentoX++)
+                    {
+                        for (int deslocamentoY = -raio; deslocamentoY <= raio; deslocamentoY++)
+                        {
+                            int vizinhoX = Math.Max(0, Math.Min(img.Width - 1, x + deslocamentoX));
+                            int vizinhoY = Math.Max(0, Math.Min(img.Height - 1, y + deslocamentoY));
+                            Color pixelVizinho = img.GetPixel(vizinhoX, vizinhoY);
+
+                            valoresR[indice] = pixelVizinho.R;
+                            valoresG[indice] = pixelVizinho.G;
+                            valoresB[indice] = pixelVizinho.B;
+                            indice++;
+                        }
+                    }
+
+                    Array.Sort(valoresR);
+                    Array.Sort(valoresG);
+                    Array.Sort(valoresB);
+
+                    Color pixelOriginal = img.GetPixel(x, y);
+                    resultado.SetPixel(x, y, Color.FromArgb(
+                        pixelOriginal.A,
+                        valoresR[indiceOrdem],
+                        valoresG[indiceOrdem],
+                        valoresB[indiceOrdem]
+                    ));
+                }
+            }
+
+            return resultado;
+        }
+
+        private void btSuavConserv_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para aplicar a suavização conservativa.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ExibirImagemFinal(SuavizacaoConservativa(img1));
+        }
+
+        private Bitmap SuavizacaoConservativa(Bitmap img)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    resultado.SetPixel(x, y, img.GetPixel(x, y));
+                }
+            }
+
+            for (int x = 1; x < img.Width - 1; x++)
+            {
+                for (int y = 1; y < img.Height - 1; y++)
+                {
+                    int minR = 255, minG = 255, minB = 255;
+                    int maxR = 0, maxG = 0, maxB = 0;
+
+                    for (int vizinhoX = x - 1; vizinhoX <= x + 1; vizinhoX++)
+                    {
+                        for (int vizinhoY = y - 1; vizinhoY <= y + 1; vizinhoY++)
+                        {
+                            if (vizinhoX == x && vizinhoY == y)
+                                continue;
+
+                            Color pixelVizinho = img.GetPixel(vizinhoX, vizinhoY);
+
+                            minR = Math.Min(minR, pixelVizinho.R);
+                            minG = Math.Min(minG, pixelVizinho.G);
+                            minB = Math.Min(minB, pixelVizinho.B);
+
+                            maxR = Math.Max(maxR, pixelVizinho.R);
+                            maxG = Math.Max(maxG, pixelVizinho.G);
+                            maxB = Math.Max(maxB, pixelVizinho.B);
+                        }
+                    }
+
+                    Color pixelCentral = img.GetPixel(x, y);
+                    int r = LimitarAoIntervalo(pixelCentral.R, minR, maxR);
+                    int g = LimitarAoIntervalo(pixelCentral.G, minG, maxG);
+                    int b = LimitarAoIntervalo(pixelCentral.B, minB, maxB);
+
+                    resultado.SetPixel(x, y, Color.FromArgb(pixelCentral.A, r, g, b));
+                }
+            }
+
+            return resultado;
+        }
+
+        private int LimitarAoIntervalo(int valor, int minimo, int maximo)
+        {
+            if (valor > maximo)
+                return maximo;
+
+            if (valor < minimo)
+                return minimo;
+
+            return valor;
+        }
+
+        private void btGaussiano_Click(object sender, EventArgs e)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para aplicar o filtro Gaussiano.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            double sigma = (double)numUpDown_Sigma.Value;
+
+            if (sigma <= 0)
+            {
+                MessageBox.Show("Informe um sigma maior que zero.",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ExibirImagemFinal(FiltroGaussiano(img1, 3, sigma));
+        }
+
+        private Bitmap FiltroGaussiano(Bitmap img, int tamanhoKernel, double sigma)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+            double[,] kernel = CriarKernelGaussiano(tamanhoKernel, sigma);
+            int raio = tamanhoKernel / 2;
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    double somaR = 0;
+                    double somaG = 0;
+                    double somaB = 0;
+
+                    for (int deslocamentoX = -raio; deslocamentoX <= raio; deslocamentoX++)
+                    {
+                        for (int deslocamentoY = -raio; deslocamentoY <= raio; deslocamentoY++)
+                        {
+                            int vizinhoX = Math.Max(0, Math.Min(img.Width - 1, x + deslocamentoX));
+                            int vizinhoY = Math.Max(0, Math.Min(img.Height - 1, y + deslocamentoY));
+                            Color pixelVizinho = img.GetPixel(vizinhoX, vizinhoY);
+                            double peso = kernel[deslocamentoX + raio, deslocamentoY + raio];
+
+                            somaR += pixelVizinho.R * peso;
+                            somaG += pixelVizinho.G * peso;
+                            somaB += pixelVizinho.B * peso;
+                        }
+                    }
+
+                    int r = Math.Max(0, Math.Min(255, (int)Math.Round(somaR)));
+                    int g = Math.Max(0, Math.Min(255, (int)Math.Round(somaG)));
+                    int b = Math.Max(0, Math.Min(255, (int)Math.Round(somaB)));
+                    Color pixelOriginal = img.GetPixel(x, y);
+
+                    resultado.SetPixel(x, y, Color.FromArgb(pixelOriginal.A, r, g, b));
+                }
+            }
+
+            return resultado;
+        }
+
+        private double[,] CriarKernelGaussiano(int tamanho, double sigma)
+        {
+            double[,] kernel = new double[tamanho, tamanho];
+            int raio = tamanho / 2;
+            double soma = 0;
+            double coeficiente = 1.0 / (2.0 * Math.PI * sigma * sigma);
+
+            for (int x = -raio; x <= raio; x++)
+            {
+                for (int y = -raio; y <= raio; y++)
+                {
+                    double expoente = -((x * x) + (y * y)) / (2.0 * sigma * sigma);
+                    double valor = coeficiente * Math.Exp(expoente);
+
+                    kernel[x + raio, y + raio] = valor;
+                    soma += valor;
+                }
+            }
+
+            for (int x = 0; x < tamanho; x++)
+            {
+                for (int y = 0; y < tamanho; y++)
+                {
+                    kernel[x, y] /= soma;
+                }
+            }
+
+            return kernel;
+        }
+
 
         private void btSalvarImagem_Click(object sender, EventArgs e)
         {
