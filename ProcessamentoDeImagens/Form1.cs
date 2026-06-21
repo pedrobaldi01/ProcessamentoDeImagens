@@ -16,6 +16,13 @@ namespace ProcessamentoDeImagens
     public partial class Form1 : Form
     {
 
+        private enum TipoFiltroValores
+        {
+            Min,
+            Max,
+            Mean
+        }
+
         Bitmap img1;
         Bitmap img2;
         Bitmap imgFinal;
@@ -46,7 +53,7 @@ namespace ProcessamentoDeImagens
             InitializeComponent();
         }
 
-        private void ArmazenarImagem1EmMatrizes()
+        private void img1Matriz()
         {
             vImg1Gray = new byte[img1.Width, img1.Height];
             vImg1R = new byte[img1.Width, img1.Height];
@@ -54,10 +61,10 @@ namespace ProcessamentoDeImagens
             vImg1B = new byte[img1.Width, img1.Height];
             vImg1A = new byte[img1.Width, img1.Height];
 
-            ArmazenarPixelsEmMatrizes(img1, vImg1Gray, vImg1R, vImg1G, vImg1B, vImg1A);
+            pixelMatrizes(img1, vImg1Gray, vImg1R, vImg1G, vImg1B, vImg1A);
         }
 
-        private void ArmazenarImagem2EmMatrizes()
+        private void img2Matriz()
         {
             vImg2Gray = new byte[img2.Width, img2.Height];
             vImg2R = new byte[img2.Width, img2.Height];
@@ -65,10 +72,10 @@ namespace ProcessamentoDeImagens
             vImg2B = new byte[img2.Width, img2.Height];
             vImg2A = new byte[img2.Width, img2.Height];
 
-            ArmazenarPixelsEmMatrizes(img2, vImg2Gray, vImg2R, vImg2G, vImg2B, vImg2A);
+            pixelMatrizes(img2, vImg2Gray, vImg2R, vImg2G, vImg2B, vImg2A);
         }
 
-        private void ArmazenarPixelsEmMatrizes(Bitmap imagem, byte[,] matrizGray, byte[,] matrizR, byte[,] matrizG, byte[,] matrizB, byte[,] matrizA)
+        private void pixelMatrizes(Bitmap imagem, byte[,] matrizGray, byte[,] matrizR, byte[,] matrizG, byte[,] matrizB, byte[,] matrizA)
         {
             for (int x = 0; x < imagem.Width; x++)
             {
@@ -83,66 +90,6 @@ namespace ProcessamentoDeImagens
                     matrizGray[x, y] = (byte)((pixel.R + pixel.G + pixel.B) / 3);
                 }
             }
-        }
-
-        private int[] CalcularHistograma(Bitmap img)
-        {
-            int[] histograma = new int[256];
-
-            for (int x = 0; x < img.Width; x++)
-            {
-                for (int y = 0; y < img.Height; y++)
-                {
-                    Color pixel = img.GetPixel(x, y);
-                    int intensidade = (pixel.R + pixel.G + pixel.B) / 3;
-
-                    histograma[intensidade]++;
-                }
-            }
-
-            return histograma;
-        }
-
-        private void MostrarHistograma(Chart chart, Bitmap img, string titulo)
-        {
-            int[] histograma = CalcularHistograma(img);
-
-            chart.Series.Clear();
-            chart.ChartAreas.Clear();
-            chart.Titles.Clear();
-            chart.Legends.Clear();
-
-            ChartArea area = new ChartArea("AreaHistograma");
-            area.AxisX.Minimum = 0;
-            area.AxisX.Maximum = 255;
-            area.AxisX.Interval = 51;
-            area.AxisY.Minimum = 0;
-            area.AxisX.MajorGrid.LineColor = Color.LightGray;
-            area.AxisY.MajorGrid.LineColor = Color.LightGray;
-            area.AxisX.LabelStyle.Font = new Font("Microsoft Sans Serif", 7F);
-            area.AxisY.LabelStyle.Font = new Font("Microsoft Sans Serif", 7F);
-            chart.ChartAreas.Add(area);
-
-            Series serie = new Series("Pixels");
-            serie.ChartType = SeriesChartType.Column;
-            serie.Color = Color.RoyalBlue;
-            serie.IsVisibleInLegend = false;
-
-            for (int i = 0; i < histograma.Length; i++)
-            {
-                serie.Points.AddXY(i, histograma[i]);
-            }
-
-            chart.Series.Add(serie);
-            chart.Titles.Add(titulo);
-            chart.Titles[0].Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold);
-        }
-
-        private void LimparHistogramaFinal()
-        {
-            chartHistFinal.Series.Clear();
-            chartHistFinal.ChartAreas.Clear();
-            chartHistFinal.Titles.Clear();
         }
 
         private void ExibirImagemFinal(Bitmap imagem)
@@ -186,7 +133,7 @@ namespace ProcessamentoDeImagens
                 {
                     // Adiciona imagem na PictureBox
                     pictureBox1.Image = img1;
-                    ArmazenarImagem1EmMatrizes();
+                    img1Matriz();
                     MostrarHistograma(chartHistOriginal, img1, "Histograma Original");
                     LimparHistogramaFinal();
                 }
@@ -228,7 +175,7 @@ namespace ProcessamentoDeImagens
                 {
                     // Adiciona imagem na PictureBox
                     pictureBox2.Image = img2;
-                    ArmazenarImagem2EmMatrizes();
+                    img2Matriz();
 
                 }
 
@@ -956,6 +903,66 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private int[] CalcularHistograma(Bitmap img)
+        {
+            int[] histograma = new int[256];
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    Color pixel = img.GetPixel(x, y);
+                    int intensidade = (pixel.R + pixel.G + pixel.B) / 3;
+
+                    histograma[intensidade]++;
+                }
+            }
+
+            return histograma;
+        }
+
+        private void MostrarHistograma(Chart chart, Bitmap img, string titulo)
+        {
+            int[] histograma = CalcularHistograma(img);
+
+            chart.Series.Clear();
+            chart.ChartAreas.Clear();
+            chart.Titles.Clear();
+            chart.Legends.Clear();
+
+            ChartArea area = new ChartArea("AreaHistograma");
+            area.AxisX.Minimum = 0;
+            area.AxisX.Maximum = 255;
+            area.AxisX.Interval = 51;
+            area.AxisY.Minimum = 0;
+            area.AxisX.MajorGrid.LineColor = Color.LightGray;
+            area.AxisY.MajorGrid.LineColor = Color.LightGray;
+            area.AxisX.LabelStyle.Font = new Font("Microsoft Sans Serif", 7F);
+            area.AxisY.LabelStyle.Font = new Font("Microsoft Sans Serif", 7F);
+            chart.ChartAreas.Add(area);
+
+            Series serie = new Series("Pixels");
+            serie.ChartType = SeriesChartType.Column;
+            serie.Color = Color.RoyalBlue;
+            serie.IsVisibleInLegend = false;
+
+            for (int i = 0; i < histograma.Length; i++)
+            {
+                serie.Points.AddXY(i, histograma[i]);
+            }
+
+            chart.Series.Add(serie);
+            chart.Titles.Add(titulo);
+            chart.Titles[0].Font = new Font("Microsoft Sans Serif", 8F, FontStyle.Bold);
+        }
+
+        private void LimparHistogramaFinal()
+        {
+            chartHistFinal.Series.Clear();
+            chartHistFinal.ChartAreas.Clear();
+            chartHistFinal.Titles.Clear();
+        }
+
         private bool ValidarDuasImagens(string operacao)
         {
             if (img1 == null || img2 == null)
@@ -1135,6 +1142,104 @@ namespace ProcessamentoDeImagens
             return resultado;
         }
 
+        private void btMin_Click(object sender, EventArgs e)
+        {
+            AplicarFiltroValores(TipoFiltroValores.Min);
+        }
+
+        private void btMax_Click(object sender, EventArgs e)
+        {
+            AplicarFiltroValores(TipoFiltroValores.Max);
+        }
+
+        private void btMean_Click(object sender, EventArgs e)
+        {
+            AplicarFiltroValores(TipoFiltroValores.Mean);
+        }
+
+        private void AplicarFiltroValores(TipoFiltroValores tipo)
+        {
+            if (img1 == null)
+            {
+                MessageBox.Show("Carregue a Imagem 1 para aplicar o filtro " + tipo.ToString().ToUpper() + ".",
+                                "Atenção",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
+            ExibirImagemFinal(FiltroValores(img1, tipo));
+        }
+
+        private Bitmap FiltroValores(Bitmap img, TipoFiltroValores tipo)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    resultado.SetPixel(x, y, img.GetPixel(x, y));
+                }
+            }
+
+            for (int x = 1; x < img.Width - 1; x++)
+            {
+                for (int y = 1; y < img.Height - 1; y++)
+                {
+                    int minR = 255, minG = 255, minB = 255;
+                    int maxR = 0, maxG = 0, maxB = 0;
+                    int somaR = 0, somaG = 0, somaB = 0;
+
+                    for (int vizinhoX = x - 1; vizinhoX <= x + 1; vizinhoX++)
+                    {
+                        for (int vizinhoY = y - 1; vizinhoY <= y + 1; vizinhoY++)
+                        {
+                            Color pixelVizinho = img.GetPixel(vizinhoX, vizinhoY);
+
+                            minR = Math.Min(minR, pixelVizinho.R);
+                            minG = Math.Min(minG, pixelVizinho.G);
+                            minB = Math.Min(minB, pixelVizinho.B);
+
+                            maxR = Math.Max(maxR, pixelVizinho.R);
+                            maxG = Math.Max(maxG, pixelVizinho.G);
+                            maxB = Math.Max(maxB, pixelVizinho.B);
+
+                            somaR += pixelVizinho.R;
+                            somaG += pixelVizinho.G;
+                            somaB += pixelVizinho.B;
+                        }
+                    }
+
+                    int r, g, b;
+
+                    if (tipo == TipoFiltroValores.Min)
+                    {
+                        r = minR;
+                        g = minG;
+                        b = minB;
+                    }
+                    else if (tipo == TipoFiltroValores.Max)
+                    {
+                        r = maxR;
+                        g = maxG;
+                        b = maxB;
+                    }
+                    else
+                    {
+                        r = somaR / 9;
+                        g = somaG / 9;
+                        b = somaB / 9;
+                    }
+
+                    Color pixelOriginal = img.GetPixel(x, y);
+                    resultado.SetPixel(x, y, Color.FromArgb(pixelOriginal.A, r, g, b));
+                }
+            }
+
+            return resultado;
+        }
+
         private void btMediana_Click(object sender, EventArgs e)
         {
             if (img1 == null)
@@ -1241,6 +1346,7 @@ namespace ProcessamentoDeImagens
                 imgFinal.Save(saveFileDialog1.FileName, format);
             }
         }
+
 
     }
 
