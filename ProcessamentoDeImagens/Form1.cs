@@ -23,6 +23,15 @@ namespace ProcessamentoDeImagens
             Mean
         }
 
+        private enum OperacaoMorfologica
+        {
+            Dilatacao,
+            Erosao,
+            Abertura,
+            Fechamento,
+            Contorno
+        }
+
         Bitmap img1;
         Bitmap img2;
         Bitmap imgFinal;
@@ -1549,6 +1558,336 @@ namespace ProcessamentoDeImagens
             }
 
             return kernel;
+        }
+
+        private void btPrewitt_Click(object sender, EventArgs e)
+        {
+            if (!ValidarImagem1Carregada("aplicar o detector de bordas Prewitt"))
+                return;
+
+            int[,] kernelX =
+            {
+                { -1, 0, 1 },
+                { -1, 0, 1 },
+                { -1, 0, 1 }
+            };
+
+            int[,] kernelY =
+            {
+                { -1, -1, -1 },
+                {  0,  0,  0 },
+                {  1,  1,  1 }
+            };
+
+            ExibirImagemFinal(DetectarBordasGradiente(img1, kernelX, kernelY));
+        }
+
+        private void btSobel_Click(object sender, EventArgs e)
+        {
+            if (!ValidarImagem1Carregada("aplicar o detector de bordas Sobel"))
+                return;
+
+            int[,] kernelX =
+            {
+                { 1, 0, -1 },
+                { 2, 0, -2 },
+                { 1, 0, -1 }
+            };
+
+            int[,] kernelY =
+            {
+                {  1,  2,  1 },
+                {  0,  0,  0 },
+                { -1, -2, -1 }
+            };
+
+            ExibirImagemFinal(DetectarBordasGradiente(img1, kernelX, kernelY));
+        }
+
+        private Bitmap DetectarBordasGradiente(Bitmap img, int[,] kernelX, int[,] kernelY)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    int gradienteX = 0;
+                    int gradienteY = 0;
+
+                    for (int deslocamentoX = -1; deslocamentoX <= 1; deslocamentoX++)
+                    {
+                        for (int deslocamentoY = -1; deslocamentoY <= 1; deslocamentoY++)
+                        {
+                            int vizinhoX = Math.Max(0, Math.Min(img.Width - 1, x + deslocamentoX));
+                            int vizinhoY = Math.Max(0, Math.Min(img.Height - 1, y + deslocamentoY));
+                            int intensidade = ObterIntensidade(img.GetPixel(vizinhoX, vizinhoY));
+
+                            gradienteX += intensidade * kernelX[deslocamentoX + 1, deslocamentoY + 1];
+                            gradienteY += intensidade * kernelY[deslocamentoX + 1, deslocamentoY + 1];
+                        }
+                    }
+
+                    int magnitude = (int)Math.Round(Math.Sqrt(
+                        (gradienteX * gradienteX) + (gradienteY * gradienteY)));
+                    magnitude = Math.Min(255, magnitude);
+
+                    Color pixelOriginal = img.GetPixel(x, y);
+                    resultado.SetPixel(x, y, Color.FromArgb(
+                        pixelOriginal.A,
+                        magnitude,
+                        magnitude,
+                        magnitude
+                    ));
+                }
+            }
+
+            return resultado;
+        }
+
+        private void btLaplaciano_Click(object sender, EventArgs e)
+        {
+            if (!ValidarImagem1Carregada("aplicar o detector de bordas Laplaciano"))
+                return;
+
+            int[,] kernel =
+            {
+                { -1, -1, -1 },
+                { -1,  8, -1 },
+                { -1, -1, -1 }
+            };
+
+            ExibirImagemFinal(DetectarBordasLaplaciano(img1, kernel));
+        }
+
+        private Bitmap DetectarBordasLaplaciano(Bitmap img, int[,] kernel)
+        {
+            Bitmap resultado = new Bitmap(img.Width, img.Height);
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    int resposta = 0;
+
+                    for (int deslocamentoX = -1; deslocamentoX <= 1; deslocamentoX++)
+                    {
+                        for (int deslocamentoY = -1; deslocamentoY <= 1; deslocamentoY++)
+                        {
+                            int vizinhoX = Math.Max(0, Math.Min(img.Width - 1, x + deslocamentoX));
+                            int vizinhoY = Math.Max(0, Math.Min(img.Height - 1, y + deslocamentoY));
+                            int intensidade = ObterIntensidade(img.GetPixel(vizinhoX, vizinhoY));
+
+                            resposta += intensidade * kernel[deslocamentoX + 1, deslocamentoY + 1];
+                        }
+                    }
+
+                    int valor = Math.Min(255, Math.Abs(resposta));
+                    Color pixelOriginal = img.GetPixel(x, y);
+                    resultado.SetPixel(x, y, Color.FromArgb(
+                        pixelOriginal.A,
+                        valor,
+                        valor,
+                        valor
+                    ));
+                }
+            }
+
+            return resultado;
+        }
+
+        private int ObterIntensidade(Color pixel)
+        {
+            return (pixel.R + pixel.G + pixel.B) / 3;
+        }
+
+        private bool ValidarImagem1Carregada(string operacao)
+        {
+            if (img1 != null)
+                return true;
+
+            MessageBox.Show("Carregue a Imagem 1 para " + operacao + ".",
+                            "Atenção",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+            return false;
+        }
+
+        private void btDilatacao_Click(object sender, EventArgs e)
+        {
+            AplicarOperacaoMorfologica(OperacaoMorfologica.Dilatacao);
+        }
+
+        private void btErosao_Click(object sender, EventArgs e)
+        {
+            AplicarOperacaoMorfologica(OperacaoMorfologica.Erosao);
+        }
+
+        private void btAbertura_Click(object sender, EventArgs e)
+        {
+            AplicarOperacaoMorfologica(OperacaoMorfologica.Abertura);
+        }
+
+        private void btFechamento_Click(object sender, EventArgs e)
+        {
+            AplicarOperacaoMorfologica(OperacaoMorfologica.Fechamento);
+        }
+
+        private void btContorno_Click(object sender, EventArgs e)
+        {
+            AplicarOperacaoMorfologica(OperacaoMorfologica.Contorno);
+        }
+
+        private void AplicarOperacaoMorfologica(OperacaoMorfologica operacao)
+        {
+            if (!ValidarImagem1Carregada("aplicar a operação morfológica selecionada"))
+                return;
+
+            ExibirImagemFinal(ExecutarOperacaoMorfologica(img1, operacao));
+        }
+
+        private Bitmap ExecutarOperacaoMorfologica(Bitmap img, OperacaoMorfologica operacao)
+        {
+            bool[,] original = CriarMatrizBinaria(img);
+            bool[,] resultado;
+
+            if (operacao == OperacaoMorfologica.Dilatacao)
+            {
+                resultado = Dilatar(original);
+            }
+            else if (operacao == OperacaoMorfologica.Erosao)
+            {
+                resultado = Erodir(original);
+            }
+            else if (operacao == OperacaoMorfologica.Abertura)
+            {
+                resultado = Dilatar(Erodir(original));
+            }
+            else if (operacao == OperacaoMorfologica.Fechamento)
+            {
+                resultado = Erodir(Dilatar(original));
+            }
+            else
+            {
+                bool[,] erodida = Erodir(original);
+                int largura = original.GetLength(0);
+                int altura = original.GetLength(1);
+                resultado = new bool[largura, altura];
+
+                for (int x = 0; x < largura; x++)
+                {
+                    for (int y = 0; y < altura; y++)
+                    {
+                        resultado[x, y] = original[x, y] && !erodida[x, y];
+                    }
+                }
+            }
+
+            return CriarImagemBinaria(resultado);
+        }
+
+        private bool[,] CriarMatrizBinaria(Bitmap img)
+        {
+            bool[,] matriz = new bool[img.Width, img.Height];
+
+            for (int x = 0; x < img.Width; x++)
+            {
+                for (int y = 0; y < img.Height; y++)
+                {
+                    matriz[x, y] = ConverterPixelBinario(img.GetPixel(x, y)) == 255;
+                }
+            }
+
+            return matriz;
+        }
+
+        private bool[,] Dilatar(bool[,] original)
+        {
+            int largura = original.GetLength(0);
+            int altura = original.GetLength(1);
+            bool[,] resultado = new bool[largura, altura];
+
+            for (int x = 0; x < largura; x++)
+            {
+                for (int y = 0; y < altura; y++)
+                {
+                    bool pixelAtivo = false;
+
+                    for (int deslocamentoX = -1; deslocamentoX <= 1 && !pixelAtivo; deslocamentoX++)
+                    {
+                        for (int deslocamentoY = -1; deslocamentoY <= 1; deslocamentoY++)
+                        {
+                            int vizinhoX = x + deslocamentoX;
+                            int vizinhoY = y + deslocamentoY;
+
+                            if (vizinhoX >= 0 && vizinhoX < largura &&
+                                vizinhoY >= 0 && vizinhoY < altura &&
+                                original[vizinhoX, vizinhoY])
+                            {
+                                pixelAtivo = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    resultado[x, y] = pixelAtivo;
+                }
+            }
+
+            return resultado;
+        }
+
+        private bool[,] Erodir(bool[,] original)
+        {
+            int largura = original.GetLength(0);
+            int altura = original.GetLength(1);
+            bool[,] resultado = new bool[largura, altura];
+
+            for (int x = 0; x < largura; x++)
+            {
+                for (int y = 0; y < altura; y++)
+                {
+                    bool pixelAtivo = true;
+
+                    for (int deslocamentoX = -1; deslocamentoX <= 1 && pixelAtivo; deslocamentoX++)
+                    {
+                        for (int deslocamentoY = -1; deslocamentoY <= 1; deslocamentoY++)
+                        {
+                            int vizinhoX = x + deslocamentoX;
+                            int vizinhoY = y + deslocamentoY;
+
+                            if (vizinhoX < 0 || vizinhoX >= largura ||
+                                vizinhoY < 0 || vizinhoY >= altura ||
+                                !original[vizinhoX, vizinhoY])
+                            {
+                                pixelAtivo = false;
+                                break;
+                            }
+                        }
+                    }
+
+                    resultado[x, y] = pixelAtivo;
+                }
+            }
+
+            return resultado;
+        }
+
+        private Bitmap CriarImagemBinaria(bool[,] matriz)
+        {
+            int largura = matriz.GetLength(0);
+            int altura = matriz.GetLength(1);
+            Bitmap resultado = new Bitmap(largura, altura);
+
+            for (int x = 0; x < largura; x++)
+            {
+                for (int y = 0; y < altura; y++)
+                {
+                    resultado.SetPixel(x, y, matriz[x, y] ? Color.White : Color.Black);
+                }
+            }
+
+            return resultado;
         }
 
 

@@ -67,16 +67,24 @@
             this.btEqualizacaoHistograma = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btMean = new System.Windows.Forms.Button();
-            this.btMax = new System.Windows.Forms.Button();
-            this.btMin = new System.Windows.Forms.Button();
-            this.btOrdem = new System.Windows.Forms.Button();
-            this.numUpDown_Ordem = new System.Windows.Forms.NumericUpDown();
             this.btSuavConserv = new System.Windows.Forms.Button();
+            this.btMean = new System.Windows.Forms.Button();
+            this.numUpDown_Ordem = new System.Windows.Forms.NumericUpDown();
+            this.btMax = new System.Windows.Forms.Button();
+            this.btOrdem = new System.Windows.Forms.Button();
+            this.btMin = new System.Windows.Forms.Button();
             this.btGaussiano = new System.Windows.Forms.Button();
             this.numUpDown_Sigma = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.btPrewitt = new System.Windows.Forms.Button();
+            this.btSobel = new System.Windows.Forms.Button();
+            this.btLaplaciano = new System.Windows.Forms.Button();
+            this.btDilatacao = new System.Windows.Forms.Button();
+            this.btErosao = new System.Windows.Forms.Button();
+            this.btAbertura = new System.Windows.Forms.Button();
+            this.btFechamento = new System.Windows.Forms.Button();
+            this.btContorno = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -556,7 +564,7 @@
             //
             // btEqualizacaoHistograma
             //
-            this.btEqualizacaoHistograma.Location = new System.Drawing.Point(355, 506);
+            this.btEqualizacaoHistograma.Location = new System.Drawing.Point(206, 523);
             this.btEqualizacaoHistograma.Margin = new System.Windows.Forms.Padding(2);
             this.btEqualizacaoHistograma.Name = "btEqualizacaoHistograma";
             this.btEqualizacaoHistograma.Size = new System.Drawing.Size(244, 29);
@@ -592,6 +600,18 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Realce de Imagens";
             //
+            // btSuavConserv
+            //
+            this.btSuavConserv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btSuavConserv.Location = new System.Drawing.Point(72, 53);
+            this.btSuavConserv.Margin = new System.Windows.Forms.Padding(2);
+            this.btSuavConserv.Name = "btSuavConserv";
+            this.btSuavConserv.Size = new System.Drawing.Size(110, 30);
+            this.btSuavConserv.TabIndex = 42;
+            this.btSuavConserv.Text = "Suav. Conservativa";
+            this.btSuavConserv.UseVisualStyleBackColor = true;
+            this.btSuavConserv.Click += new System.EventHandler(this.btSuavConserv_Click);
+            //
             // btMean
             //
             this.btMean.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -603,41 +623,6 @@
             this.btMean.Text = "MEAN";
             this.btMean.UseVisualStyleBackColor = true;
             this.btMean.Click += new System.EventHandler(this.btMean_Click);
-            //
-            // btMax
-            //
-            this.btMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMax.Location = new System.Drawing.Point(10, 53);
-            this.btMax.Margin = new System.Windows.Forms.Padding(2);
-            this.btMax.Name = "btMax";
-            this.btMax.Size = new System.Drawing.Size(50, 29);
-            this.btMax.TabIndex = 40;
-            this.btMax.Text = "MAX";
-            this.btMax.UseVisualStyleBackColor = true;
-            this.btMax.Click += new System.EventHandler(this.btMax_Click);
-            //
-            // btMin
-            //
-            this.btMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMin.Location = new System.Drawing.Point(10, 18);
-            this.btMin.Margin = new System.Windows.Forms.Padding(2);
-            this.btMin.Name = "btMin";
-            this.btMin.Size = new System.Drawing.Size(50, 29);
-            this.btMin.TabIndex = 38;
-            this.btMin.Text = "MIN";
-            this.btMin.UseVisualStyleBackColor = true;
-            this.btMin.Click += new System.EventHandler(this.btMin_Click);
-            //
-            // btOrdem
-            //
-            this.btOrdem.Location = new System.Drawing.Point(72, 87);
-            this.btOrdem.Margin = new System.Windows.Forms.Padding(2);
-            this.btOrdem.Name = "btOrdem";
-            this.btOrdem.Size = new System.Drawing.Size(50, 30);
-            this.btOrdem.TabIndex = 38;
-            this.btOrdem.Text = "Ordem";
-            this.btOrdem.UseVisualStyleBackColor = true;
-            this.btOrdem.Click += new System.EventHandler(this.btOrdem_Click);
             //
             // numUpDown_Ordem
             //
@@ -668,17 +653,40 @@
             0,
             0});
             //
-            // btSuavConserv
+            // btMax
             //
-            this.btSuavConserv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btSuavConserv.Location = new System.Drawing.Point(72, 53);
-            this.btSuavConserv.Margin = new System.Windows.Forms.Padding(2);
-            this.btSuavConserv.Name = "btSuavConserv";
-            this.btSuavConserv.Size = new System.Drawing.Size(110, 30);
-            this.btSuavConserv.TabIndex = 42;
-            this.btSuavConserv.Text = "Suav. Conservativa";
-            this.btSuavConserv.UseVisualStyleBackColor = true;
-            this.btSuavConserv.Click += new System.EventHandler(this.btSuavConserv_Click);
+            this.btMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMax.Location = new System.Drawing.Point(10, 53);
+            this.btMax.Margin = new System.Windows.Forms.Padding(2);
+            this.btMax.Name = "btMax";
+            this.btMax.Size = new System.Drawing.Size(50, 29);
+            this.btMax.TabIndex = 40;
+            this.btMax.Text = "MAX";
+            this.btMax.UseVisualStyleBackColor = true;
+            this.btMax.Click += new System.EventHandler(this.btMax_Click);
+            //
+            // btOrdem
+            //
+            this.btOrdem.Location = new System.Drawing.Point(72, 87);
+            this.btOrdem.Margin = new System.Windows.Forms.Padding(2);
+            this.btOrdem.Name = "btOrdem";
+            this.btOrdem.Size = new System.Drawing.Size(50, 30);
+            this.btOrdem.TabIndex = 38;
+            this.btOrdem.Text = "Ordem";
+            this.btOrdem.UseVisualStyleBackColor = true;
+            this.btOrdem.Click += new System.EventHandler(this.btOrdem_Click);
+            //
+            // btMin
+            //
+            this.btMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btMin.Location = new System.Drawing.Point(10, 18);
+            this.btMin.Margin = new System.Windows.Forms.Padding(2);
+            this.btMin.Name = "btMin";
+            this.btMin.Size = new System.Drawing.Size(50, 29);
+            this.btMin.TabIndex = 38;
+            this.btMin.Text = "MIN";
+            this.btMin.UseVisualStyleBackColor = true;
+            this.btMin.Click += new System.EventHandler(this.btMin_Click);
             //
             // btGaussiano
             //
@@ -742,11 +750,112 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Filtragem Gaussiana";
             //
+            // btPrewitt
+            //
+            this.btPrewitt.Location = new System.Drawing.Point(480, 464);
+            this.btPrewitt.Margin = new System.Windows.Forms.Padding(2);
+            this.btPrewitt.Name = "btPrewitt";
+            this.btPrewitt.Size = new System.Drawing.Size(110, 29);
+            this.btPrewitt.TabIndex = 41;
+            this.btPrewitt.Text = "Prewitt";
+            this.btPrewitt.UseVisualStyleBackColor = true;
+            this.btPrewitt.Click += new System.EventHandler(this.btPrewitt_Click);
+            //
+            // btSobel
+            //
+            this.btSobel.Location = new System.Drawing.Point(480, 497);
+            this.btSobel.Margin = new System.Windows.Forms.Padding(2);
+            this.btSobel.Name = "btSobel";
+            this.btSobel.Size = new System.Drawing.Size(110, 29);
+            this.btSobel.TabIndex = 42;
+            this.btSobel.Text = "Sobel";
+            this.btSobel.UseVisualStyleBackColor = true;
+            this.btSobel.Click += new System.EventHandler(this.btSobel_Click);
+            //
+            // btLaplaciano
+            //
+            this.btLaplaciano.Location = new System.Drawing.Point(594, 464);
+            this.btLaplaciano.Margin = new System.Windows.Forms.Padding(2);
+            this.btLaplaciano.Name = "btLaplaciano";
+            this.btLaplaciano.Size = new System.Drawing.Size(110, 29);
+            this.btLaplaciano.TabIndex = 43;
+            this.btLaplaciano.Text = "Laplaciano";
+            this.btLaplaciano.UseVisualStyleBackColor = true;
+            this.btLaplaciano.Click += new System.EventHandler(this.btLaplaciano_Click);
+            //
+            // btDilatacao
+            //
+            this.btDilatacao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btDilatacao.Location = new System.Drawing.Point(763, 439);
+            this.btDilatacao.Margin = new System.Windows.Forms.Padding(2);
+            this.btDilatacao.Name = "btDilatacao";
+            this.btDilatacao.Size = new System.Drawing.Size(80, 30);
+            this.btDilatacao.TabIndex = 44;
+            this.btDilatacao.Text = "Dilatação";
+            this.btDilatacao.UseVisualStyleBackColor = true;
+            this.btDilatacao.Click += new System.EventHandler(this.btDilatacao_Click);
+            //
+            // btErosao
+            //
+            this.btErosao.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btErosao.Location = new System.Drawing.Point(847, 439);
+            this.btErosao.Margin = new System.Windows.Forms.Padding(2);
+            this.btErosao.Name = "btErosao";
+            this.btErosao.Size = new System.Drawing.Size(80, 30);
+            this.btErosao.TabIndex = 45;
+            this.btErosao.Text = "Erosão";
+            this.btErosao.UseVisualStyleBackColor = true;
+            this.btErosao.Click += new System.EventHandler(this.btErosao_Click);
+            //
+            // btAbertura
+            //
+            this.btAbertura.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btAbertura.Location = new System.Drawing.Point(763, 473);
+            this.btAbertura.Margin = new System.Windows.Forms.Padding(2);
+            this.btAbertura.Name = "btAbertura";
+            this.btAbertura.Size = new System.Drawing.Size(80, 30);
+            this.btAbertura.TabIndex = 46;
+            this.btAbertura.Text = "Abertura";
+            this.btAbertura.UseVisualStyleBackColor = true;
+            this.btAbertura.Click += new System.EventHandler(this.btAbertura_Click);
+            //
+            // btFechamento
+            //
+            this.btFechamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btFechamento.Location = new System.Drawing.Point(847, 473);
+            this.btFechamento.Margin = new System.Windows.Forms.Padding(2);
+            this.btFechamento.Name = "btFechamento";
+            this.btFechamento.Size = new System.Drawing.Size(80, 30);
+            this.btFechamento.TabIndex = 47;
+            this.btFechamento.Text = "Fechamento";
+            this.btFechamento.UseVisualStyleBackColor = true;
+            this.btFechamento.Click += new System.EventHandler(this.btFechamento_Click);
+            //
+            // btContorno
+            //
+            this.btContorno.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btContorno.Location = new System.Drawing.Point(763, 507);
+            this.btContorno.Margin = new System.Windows.Forms.Padding(2);
+            this.btContorno.Name = "btContorno";
+            this.btContorno.Size = new System.Drawing.Size(80, 30);
+            this.btContorno.TabIndex = 48;
+            this.btContorno.Text = "Contorno";
+            this.btContorno.UseVisualStyleBackColor = true;
+            this.btContorno.Click += new System.EventHandler(this.btContorno_Click);
+            //
             // Form1
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(965, 658);
+            this.Controls.Add(this.btContorno);
+            this.Controls.Add(this.btFechamento);
+            this.Controls.Add(this.btAbertura);
+            this.Controls.Add(this.btErosao);
+            this.Controls.Add(this.btDilatacao);
+            this.Controls.Add(this.btLaplaciano);
+            this.Controls.Add(this.btSobel);
+            this.Controls.Add(this.btPrewitt);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
@@ -845,6 +954,14 @@
         private System.Windows.Forms.NumericUpDown numUpDown_Sigma;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btPrewitt;
+        private System.Windows.Forms.Button btSobel;
+        private System.Windows.Forms.Button btLaplaciano;
+        private System.Windows.Forms.Button btDilatacao;
+        private System.Windows.Forms.Button btErosao;
+        private System.Windows.Forms.Button btAbertura;
+        private System.Windows.Forms.Button btFechamento;
+        private System.Windows.Forms.Button btContorno;
     }
 }
 
